@@ -685,12 +685,6 @@
       <schema>dbo</schema>
       <table>cs_punto_lr</table>
       <key>
-        <name>FK_COMPROBANTE_SERVICIO</name>
-        <field>FK_COMPROBANTE_SERVICIO</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
         <name>FK_PUNTOLR</name>
         <field>FK_PUNTOLR</field>
         <condition>=</condition>
@@ -699,7 +693,7 @@
       <value>
         <name>FK_COMPROBANTE_SERVICIO</name>
         <rename>FK_COMPROBANTE_SERVICIO</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>FK_PUNTOLR</name>
@@ -714,7 +708,7 @@
       <value>
         <name>FEC_MODIFICACION</name>
         <rename>FEC_MODIFICACION</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>USUARIO_CREACION</name>

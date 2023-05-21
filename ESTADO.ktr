@@ -623,7 +623,7 @@
     </partitioning>
     <connection>Repositorio Movil</connection>
     <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
+    <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>dbo</schema>
       <table>estado</table>
@@ -642,11 +642,6 @@
         <name>FK_PAIS</name>
         <rename>FK_PAIS</rename>
         <update>Y</update>
-      </value>
-      <value>
-        <name>COD_ESTADO</name>
-        <rename>COD_ESTADO</rename>
-        <update>N</update>
       </value>
       <value>
         <name>FEC_CREACION</name>

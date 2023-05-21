@@ -647,7 +647,7 @@
       <value>
         <name>FEC_MODIFICACION</name>
         <rename>FEC_MODIFICACION</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>ESTATUS_REGISTRO</name>
@@ -754,14 +754,14 @@ FROM dbo.empleados
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
         <name>nro_trab</name>
-        <length>9</length>
-        <precision>0</precision>
+        <length>10</length>
+        <precision>-1</precision>
         <origin>Leer EMPLEADOS legado</origin>
         <comments>nro_trab</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -1104,9 +1104,11 @@ FROM dbo.empleados
     <fields>
       <field>
         <name>cod_loc</name>
+        <rename/>
       </field>
       <field>
         <name>des_loc</name>
+        <rename/>
       </field>
       <field>
         <name>nro_trab</name>
@@ -1138,6 +1140,7 @@ FROM dbo.empleados
       </field>
       <field>
         <name>status</name>
+        <rename/>
       </field>
       <field>
         <name>situacion</name>
@@ -1145,18 +1148,23 @@ FROM dbo.empleados
       </field>
       <field>
         <name>USUARIO_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>

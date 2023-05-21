@@ -633,12 +633,6 @@
         <condition>=</condition>
         <name2/>
       </key>
-      <key>
-        <name>NB_OFICINA</name>
-        <field>NB_OFICINA</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
       <value>
         <name>COD_OFICINA</name>
         <rename>COD_OFICINA</rename>
@@ -647,7 +641,7 @@
       <value>
         <name>NB_OFICINA</name>
         <rename>NB_OFICINA</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>FK_COMPANIA</name>
@@ -677,7 +671,7 @@
       <value>
         <name>FEC_MODIFICACION</name>
         <rename>FEC_MODIFICACION</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
     </lookup>
     <attributes/>
