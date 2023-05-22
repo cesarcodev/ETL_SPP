@@ -647,7 +647,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>INNER</join_type>
+    <join_type>LEFT OUTER</join_type>
     <step1>Sort rows</step1>
     <step2>Leer PERSONA repositorio</step2>
     <keys_1>
@@ -1019,8 +1019,8 @@ ORDER BY NUM_EMPLEADO</sql>
       <schema_name/>
     </partitioning>
     <connection>DEMO</connection>
-    <sql> SELECT 
-TRIM([nro_trab]) as nro_trab
+    <sql>SELECT 
+  TRIM(empleado) AS nro_trab
 , lr.fecha_listarec
 , lr.num_listarec
 , lr.num_ofic_serv
@@ -1029,15 +1029,26 @@ TRIM([nro_trab]) as nro_trab
 , 'Sistema' as USUARIO_MODIFICACION
 , CURRENT_TIMESTAMP as FEC_CREACION 
 , CURRENT_TIMESTAMP as FEC_MODIFICACION 
-, (CASE WHEN status = 'ACTIVO' THEN 1 ELSE 2 END) as ESTATUS_REGISTRO
-, (CASE WHEN lr.num_emp_chofer = em.nro_trab THEN 2 WHEN lr.num_emp_ayud = em.nro_trab THEN 1 WHEN lr.num_emp_cajero = em.nro_trab THEN 3 WHEN lr.cuarto_hombre = em.nro_trab THEN 4 WHEN lr.quinto_hombre = em.nro_trab THEN 5 WHEN lr.sexto_hombre = em.nro_trab THEN 6 END) AS ROL
-  FROM [dbo].[empleados] as em
-  INNER JOIN re_lista_rec_r as lr
-  ON lr.num_emp_chofer = em.nro_trab OR lr.num_emp_ayud = em.nro_trab OR lr.num_emp_cajero = em.nro_trab OR lr.cuarto_hombre = em.nro_trab OR lr.quinto_hombre = em.nro_trab OR lr.sexto_hombre = em.nro_trab
---where lr.status_lr = 11 AND lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
-where lr.fecha_listarec = '2022-10-06'
---where lr.fecha_listarec = '2022-09-30'
-ORDER BY lr.num_listarec, lr.fecha_listarec, lr.num_ofic_serv, lr.num_ruta_oper</sql>
+, (	SELECT 
+	(CASE WHEN  status = 'ACTIVO'  THEN 1 ELSE 2 END)  
+	from empleados as em where em.nro_trab=empleado
+	) AS ESTATUS_REGISTRO
+, ROL
+
+  FROM re_lista_rec_r as lr
+  cross apply
+(
+  values
+  ('2', lr.num_emp_chofer),
+  ('1', lr.num_emp_ayud),
+  ('3', lr.num_emp_cajero),
+  ('4', lr.cuarto_hombre),
+  ('5', lr.quinto_hombre),
+  ('6', lr.sexto_hombre)
+) c (ROL, empleado)
+
+ WHERE lr.fecha_listarec = '2022-10-06'
+ ORDER BY lr.num_listarec, lr.fecha_listarec, lr.num_ofic_serv, lr.num_ruta_oper,rol;</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1048,11 +1059,11 @@ ORDER BY lr.num_listarec, lr.fecha_listarec, lr.num_ofic_serv, lr.num_ruta_oper<
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>Field2</name>
+        <name>nro_trab</name>
         <length>10</length>
         <precision>-1</precision>
         <origin>Leer empleado legado</origin>
-        <comments/>
+        <comments>nro_trab</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -1276,14 +1287,14 @@ ORDER BY lr.num_listarec, lr.fecha_listarec, lr.num_ofic_serv, lr.num_ruta_oper<
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>ROL</name>
-        <length>9</length>
-        <precision>0</precision>
+        <name>rol</name>
+        <length>1</length>
+        <precision>-1</precision>
         <origin>Leer empleado legado</origin>
-        <comments>ROL</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <comments>rol</comments>
+        <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
