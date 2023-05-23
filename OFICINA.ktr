@@ -633,6 +633,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>FK_COMPANIA</name>
+        <field>FK_COMPANIA</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>COD_OFICINA</name>
         <rename>COD_OFICINA</rename>

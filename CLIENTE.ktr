@@ -592,7 +592,7 @@
       <value>
         <name>COD_CLIENTE</name>
         <rename>COD_CLIENTE</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>RAZON_SOCIAL</name>

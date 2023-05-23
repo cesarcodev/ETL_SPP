@@ -733,6 +733,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>FK_CIUDAD</name>
+        <field>FK_CIUDAD</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>NB_MUNICIPIO</name>
         <rename>NB_MUNICIPIO</rename>
