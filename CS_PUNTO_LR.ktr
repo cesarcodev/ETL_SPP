@@ -785,8 +785,8 @@
 	AND lr.num_listarec = csle.num_listarec_ent 
 	AND lr.num_cia_serv = csle.cia_serv_ent
 	
--- WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lr.status_lr=11
- WHERE lr.fecha_listarec = '2023-01-06'
+   WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lr.status_lr=11
+ --WHERE lr.fecha_listarec = '2023-01-06'
 order by csle.nro_comp</sql>
     <limit/>
     <lookup/>

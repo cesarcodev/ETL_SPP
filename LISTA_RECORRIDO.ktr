@@ -967,7 +967,7 @@ ORDER BY ID_OFICINA
         <type>Timestamp</type>
         <storagetype>normal</storagetype>
         <name>FEC_ESTATUS</name>
-        <length>0</length>
+        <length>3</length>
         <precision>-1</precision>
         <origin>Leer OFICINA repositorio</origin>
         <comments>FEC_ESTATUS</comments>
@@ -1222,9 +1222,9 @@ ORDER BY FK_OFICINA
 , 0 as ID_REGISTRO
 , 19 as FK_ESTATUS
   FROM re_lista_rec_r
-where fecha_listarec = '2022-10-06'
+--where fecha_listarec = '2022-10-06'
 --where fecha_listarec = '2022-09-30'
---where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
+where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
 
 ORDER BY num_ruta_oper, num_ofic_serv</sql>
     <limit/>

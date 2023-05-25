@@ -906,8 +906,8 @@ ORDER BY COD_MUNICIPIO
   list_r.num_ruta_oper = list_d.num_ruta_oper AND 
   list_r.num_listarec = list_d.num_listarec AND 
   list_r.fecha_listarec = list_d.fecha_listarec
-WHERE list_r.fecha_listarec ='2022-10-06') lrd
---WHERE list_d.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND status_lr = 11) lrd
+--WHERE list_r.fecha_listarec ='2022-10-06') lrd
+  WHERE list_d.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND status_lr = 11) lrd
   ON lrd.num_punto = punto.num_pto
   WHERE csle.pto_destino = punto.num_pto OR csle.pto_origen = punto.num_pto OR lrd.num_punto = punto.num_pto
   ORDER BY num_municip</sql>

@@ -771,7 +771,7 @@
 	AND lr.num_listarec = csle.num_listarec_ent 
 	AND lr.num_cia_serv = csle.cia_serv_ent
 	
- --WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lr.status_lr=11
+ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lr.status_lr=11
  --WHERE lr.fecha_listarec = '2022-10-08'
   ORDER BY csle.pto_origen</sql>
     <limit/>
@@ -1450,31 +1450,24 @@
     <fields>
       <field>
         <name>cia_serv_ent</name>
-        <rename/>
       </field>
       <field>
         <name>num_ofic_serv_ent</name>
-        <rename/>
       </field>
       <field>
         <name>num_ruta_oper_ent</name>
-        <rename/>
       </field>
       <field>
         <name>fecha_listarec_ent</name>
-        <rename/>
       </field>
       <field>
         <name>num_listarec_ent</name>
-        <rename/>
       </field>
       <field>
         <name>num_linea_lr_ent</name>
-        <rename/>
       </field>
       <field>
         <name>num_cli</name>
-        <rename/>
       </field>
       <field>
         <name>nro_comp</name>
@@ -1498,51 +1491,39 @@
       </field>
       <field>
         <name>pto_origen</name>
-        <rename/>
       </field>
       <field>
         <name>pto_destino</name>
-        <rename/>
       </field>
       <field>
         <name>num_moneda</name>
-        <rename/>
       </field>
       <field>
         <name>num_valor</name>
-        <rename/>
       </field>
       <field>
         <name>nombre_divisa</name>
-        <rename/>
       </field>
       <field>
         <name>simbolo_divisa</name>
-        <rename/>
       </field>
       <field>
         <name>nombre_valor</name>
-        <rename/>
       </field>
       <field>
         <name>USUARIO_CREACION</name>
-        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
-        <rename/>
       </field>
       <field>
         <name>FEC_CREACION</name>
-        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
-        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>

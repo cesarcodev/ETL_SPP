@@ -783,7 +783,7 @@ JOIN ruta as ruta
 ON ruta.ID_RUTA = lista_recorrido.FK_RUTA
 JOIN oficina as oficina
 ON oficina.ID_OFICINA = ruta.FK_OFICINA
-WHERE FK_ESTATUS=19
+WHERE lista_recorrido.FK_ESTATUS=19
 ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, oficina.COD_OFICINA, ruta.COD_RUTA;</sql>
     <limit/>
     <lookup/>
@@ -1047,7 +1047,8 @@ ORDER BY NUM_EMPLEADO</sql>
   ('6', lr.sexto_hombre)
 ) c (ROL, empleado)
 
- WHERE lr.fecha_listarec = '2022-10-06'
+ --WHERE lr.fecha_listarec = '2022-10-06'
+WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
  ORDER BY lr.num_listarec, lr.fecha_listarec, lr.num_ofic_serv, lr.num_ruta_oper,rol;</sql>
     <limit/>
     <lookup/>
@@ -1289,11 +1290,11 @@ ORDER BY NUM_EMPLEADO</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>rol</name>
+        <name>ROL</name>
         <length>1</length>
         <precision>-1</precision>
         <origin>Leer empleado legado</origin>
-        <comments>rol</comments>
+        <comments>ROL</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
