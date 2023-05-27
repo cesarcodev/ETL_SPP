@@ -550,7 +550,7 @@
     <sql>SELECT 
 TOP(1)ISNULL(MAX(FECHA_TRANSACCION),  DATEADD(day, -10, CAST(GETDATE() AS date))  ) as FECHA
 FROM TRACKING_MAESTRO
-</sql>
+where origen != 'PM24'</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

@@ -633,9 +633,15 @@
     <step2>Leer MUNICIPIO repositorio</step2>
     <keys_1>
       <key>num_municip</key>
+      <key>num_pais</key>
+      <key>num_edo</key>
+      <key>num_ciudad</key>
     </keys_1>
     <keys_2>
       <key>COD_MUNICIPIO</key>
+      <key>COD_PAIS</key>
+      <key>COD_ESTADO</key>
+      <key>COD_CIUDAD</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -778,11 +784,19 @@
     </partitioning>
     <connection>Repositorio Movil</connection>
     <sql>SELECT
-  ID_MUNICIPIO
-, COD_MUNICIPIO
-FROM dbo.municipio
-ORDER BY COD_MUNICIPIO
-</sql>
+  m.ID_MUNICIPIO
+, m.COD_MUNICIPIO
+, e.COD_ESTADO
+, c.COD_CIUDAD
+, p.COD_PAIS
+FROM dbo.municipio m
+LEFT JOIN dbo.CIUDAD c ON
+c.ID_CIUDAD = m.FK_CIUDAD
+LEFT JOIN dbo.ESTADO e ON
+e.ID_ESTADO=c.FK_ESTADO
+LEFT JOIN dbo.PAIS p ON
+e.FK_PAIS=p.ID_PAIS
+ORDER BY m.COD_MUNICIPIO</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -809,7 +823,7 @@ ORDER BY COD_MUNICIPIO
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -832,7 +846,76 @@ ORDER BY COD_MUNICIPIO
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_ESTADO</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_ESTADO</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_CIUDAD</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_CIUDAD</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_PAIS</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_PAIS</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>

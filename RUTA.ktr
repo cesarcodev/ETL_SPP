@@ -592,9 +592,11 @@
     <step2>Leer OFICINA repositorio</step2>
     <keys_1>
       <key>cod_ofic</key>
+      <key>cod_cia</key>
     </keys_1>
     <keys_2>
       <key>COD_OFICINA</key>
+      <key>COD_COMPANIA</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -706,14 +708,17 @@
       <schema_name/>
     </partitioning>
     <connection>Repositorio Movil</connection>
-    <sql>SELECT
-  ID_OFICINA
-, COD_OFICINA
-, NB_OFICINA
-, FK_COMPANIA
-FROM dbo.oficina
-ORDER BY COD_OFICINA
-</sql>
+    <sql>SELECT 
+	o.ID_OFICINA ,
+	o.COD_OFICINA, 
+	o.NB_OFICINA,
+	o.FK_COMPANIA,
+	c.ID_COMPANIA, 
+	c.COD_COMPANIA 
+FROM dbo.OFICINA o
+LEFT JOIN dbo.COMPANIA c
+ON c.ID_COMPANIA = o.FK_COMPANIA
+ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -740,7 +745,7 @@ ORDER BY COD_OFICINA
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -763,7 +768,7 @@ ORDER BY COD_OFICINA
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -786,7 +791,7 @@ ORDER BY COD_OFICINA
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -809,7 +814,53 @@ ORDER BY COD_OFICINA
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>ID_COMPANIA</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer OFICINA repositorio</origin>
+        <comments>ID_COMPANIA</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>COD_COMPANIA</name>
+        <length>5</length>
+        <precision>-1</precision>
+        <origin>Leer OFICINA repositorio</origin>
+        <comments>COD_COMPANIA</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -823,8 +874,8 @@ ORDER BY COD_OFICINA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>96</yloc>
+      <xloc>128</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

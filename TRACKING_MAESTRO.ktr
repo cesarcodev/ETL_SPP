@@ -592,80 +592,6 @@
     </hop>
   </order>
   <step>
-    <name>Obtener variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>FECHA</name>
-        <variable>${FECHA}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage/>
-    <fields>
-      <field>
-        <name>FECHA</name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Buscar FK ESTATUS</name>
     <type>MergeJoin</type>
     <description/>
@@ -927,6 +853,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>STATUS_NUEVO</name>
+        <field>STATUS_NUEVO</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>FECHA_TRANSACCION</name>
         <rename>FECHA_TRANSACCION</rename>
@@ -1015,7 +947,12 @@
       <value>
         <name>FK_ESTATUS_MAESTROS</name>
         <rename>FK_ESTATUS_MAESTROS</rename>
-        <update>Y</update>
+        <update>N</update>
+      </value>
+      <value>
+        <name>STATUS_NUEVO</name>
+        <rename>STATUS_NUEVO</rename>
+        <update>N</update>
       </value>
     </lookup>
     <attributes/>
@@ -1027,7 +964,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>928</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1180,33 +1117,10 @@ WHERE CONVERT(DATETIME2, fecha_transaccion) >= CONVERT(DATETIME2, '${FECHA}')
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
       <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>fecha</name>
-        <length>3</length>
-        <precision>-1</precision>
-        <origin>Leer La ultima fecha de transacción en REPOSITORIO</origin>
-        <comments>fecha</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>FECHA_1</name>
-        <length>0</length>
+        <name>FECHA</name>
+        <length>8</length>
         <precision>-1</precision>
         <origin>Obtener variables</origin>
         <comments/>
@@ -1977,6 +1891,45 @@ WHERE CONVERT(DATETIME2, fecha_transaccion) >= CONVERT(DATETIME2, '${FECHA}')
     </GUI>
   </step>
   <step>
+    <name>Obtener variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA</name>
+        <variable>${FECHA}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Validar datos</name>
     <type>SelectValues</type>
     <description/>
@@ -2030,6 +1983,7 @@ WHERE CONVERT(DATETIME2, fecha_transaccion) >= CONVERT(DATETIME2, '${FECHA}')
       </field>
       <field>
         <name>status_nuevo</name>
+        <rename>STATUS_NUEVO</rename>
       </field>
       <field>
         <name>status_legado</name>
@@ -2093,21 +2047,27 @@ WHERE CONVERT(DATETIME2, fecha_transaccion) >= CONVERT(DATETIME2, '${FECHA}')
       </field>
       <field>
         <name>comp_digital</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
+        <rename/>
       </field>
       <field>
         <name>ID_ESTATUS_MAESTROS</name>
@@ -2126,6 +2086,41 @@ WHERE CONVERT(DATETIME2, fecha_transaccion) >= CONVERT(DATETIME2, '${FECHA}')
     <GUI>
       <xloc>768</xloc>
       <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage/>
+    <fields>
+      <field>
+        <name>FECHA</name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

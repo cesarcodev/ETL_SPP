@@ -587,7 +587,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>LEFT OUTER</join_type>
+    <join_type>RIGHT OUTER</join_type>
     <step1>Leer ESTADO legado</step1>
     <step2>Leer PAIS legado</step2>
     <keys_1>
@@ -739,7 +739,7 @@ ORDER BY num_pais
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -762,7 +762,7 @@ ORDER BY num_pais
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -785,7 +785,7 @@ ORDER BY num_pais
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -808,7 +808,7 @@ ORDER BY num_pais
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -831,7 +831,7 @@ ORDER BY num_pais
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -854,7 +854,7 @@ ORDER BY num_pais
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -877,18 +877,18 @@ ORDER BY num_pais
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>FK_ESTATUS</name>
+        <name>ESTATUS_REGISTRO</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Leer ESTADO legado</origin>
-        <comments>FK_ESTATUS</comments>
+        <comments>ESTATUS_REGISTRO</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -900,7 +900,7 @@ ORDER BY num_pais
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -914,7 +914,7 @@ ORDER BY num_pais
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>64</xloc>
       <yloc>16</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1001,7 +1001,7 @@ ORDER BY COD_PAIS
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>112</yloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -592,9 +592,11 @@
     <step2>Leer ESTADO repositorio</step2>
     <keys_1>
       <key>num_edo</key>
+      <key>num_pais</key>
     </keys_1>
     <keys_2>
       <key>COD_ESTADO</key>
+      <key>COD_PAIS</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -630,12 +632,6 @@
       <key>
         <name>COD_CIUDAD</name>
         <field>COD_CIUDAD</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>FK_ESTADO</name>
-        <field>FK_ESTADO</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -746,7 +742,7 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -769,7 +765,7 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -792,7 +788,7 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -815,7 +811,7 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -838,7 +834,7 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -861,7 +857,7 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -884,7 +880,7 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -907,7 +903,7 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -930,18 +926,18 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>FK_ESTATUS</name>
+        <name>ESTATUS_REGISTRO</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Leer CIUDAD legado</origin>
-        <comments>FK_ESTATUS</comments>
+        <comments>ESTATUS_REGISTRO</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -953,7 +949,7 @@ ORDER BY num_edo
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -984,11 +980,14 @@ ORDER BY num_edo
       <schema_name/>
     </partitioning>
     <connection>Repositorio Movil</connection>
-    <sql>SELECT
-  ID_ESTADO
-, NB_ESTADO
-, COD_ESTADO
-FROM dbo.estado
+    <sql> SELECT
+  e.ID_ESTADO
+, e.NB_ESTADO
+, e.COD_ESTADO
+, p.COD_PAIS
+FROM dbo.estado e
+RIGHT JOIN dbo.pais p
+ON e.FK_PAIS=p.ID_PAIS
 ORDER BY COD_ESTADO
 </sql>
     <limit/>
@@ -1017,7 +1016,7 @@ ORDER BY COD_ESTADO
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1040,7 +1039,7 @@ ORDER BY COD_ESTADO
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1063,7 +1062,30 @@ ORDER BY COD_ESTADO
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_PAIS</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer ESTADO repositorio</origin>
+        <comments>COD_PAIS</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1108,18 +1130,23 @@ ORDER BY COD_ESTADO
       </field>
       <field>
         <name>FEC_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
