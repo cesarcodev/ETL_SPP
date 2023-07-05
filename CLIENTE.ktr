@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>localhost</server>
+    <server>10.66.4.189</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>fuzcategui</username>
+    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>repositorio</database>
+    <database>REPOMOVIL</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>repomovil2</username>
+    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -617,7 +617,7 @@
       <value>
         <name>FEC_MODIFICACION</name>
         <rename>FEC_MODIFICACION</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>USUARIO_CREACION</name>

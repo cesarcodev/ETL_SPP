@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>localhost</server>
+    <server>10.66.4.189</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>fuzcategui</username>
+    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>repositorio</database>
+    <database>REPOMOVIL</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>repomovil2</username>
+    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -566,7 +566,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leer PAIS legado</from>
+      <from>Leer PAIS Repositorio</from>
       <to>Buscar fk_pais</to>
       <enabled>Y</enabled>
     </hop>
@@ -587,9 +587,9 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>RIGHT OUTER</join_type>
+    <join_type>INNER</join_type>
     <step1>Leer ESTADO legado</step1>
-    <step2>Leer PAIS legado</step2>
+    <step2>Leer PAIS Repositorio</step2>
     <keys_1>
       <key>num_pais</key>
     </keys_1>
@@ -647,7 +647,7 @@
       <value>
         <name>FK_PAIS</name>
         <rename>FK_PAIS</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>FEC_CREACION</name>
@@ -657,7 +657,7 @@
       <value>
         <name>FEC_MODIFICACION</name>
         <rename>FEC_MODIFICACION</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>USUARIO_CREACION</name>
@@ -672,6 +672,11 @@
       <value>
         <name>ESTATUS_REGISTRO</name>
         <rename>ESTATUS_REGISTRO</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>COD_ESTADO</name>
+        <rename>COD_ESTADO</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -920,7 +925,7 @@ ORDER BY num_pais
     </GUI>
   </step>
   <step>
-    <name>Leer PAIS legado</name>
+    <name>Leer PAIS Repositorio</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -932,11 +937,10 @@ ORDER BY num_pais
     </partitioning>
     <connection>Repositorio Movil</connection>
     <sql>SELECT
-  ID_PAIS
-, COD_PAIS
-FROM dbo.pais
-ORDER BY COD_PAIS
-</sql>
+  p.ID_PAIS
+, p.COD_PAIS
+FROM dbo.pais p
+ORDER BY p.COD_PAIS</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>

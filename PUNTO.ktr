@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>localhost</server>
+    <server>10.66.4.189</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>fuzcategui</username>
+    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>repositorio</database>
+    <database>REPOMOVIL</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>repomovil2</username>
+    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -576,47 +576,16 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Guardar datos en PUNTO</from>
-      <to>Block this step until steps finish</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Block this step until steps finish</from>
       <to>UPDATE COD_CLIENTE en PUNTO repositorio</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Guardar datos en PUNTO</from>
+      <to>Block this step until steps finish</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>Block this step until steps finish</name>
-    <type>BlockUntilStepsFinish</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <steps>
-      <step>
-        <name>Guardar datos en PUNTO</name>
-        <CopyNr>0</CopyNr>
-      </step>
-    </steps>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>720</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Buscar fk_municipio</name>
     <type>MergeJoin</type>
@@ -632,16 +601,16 @@
     <step1>Leer punto legado</step1>
     <step2>Leer MUNICIPIO repositorio</step2>
     <keys_1>
-      <key>num_municip</key>
       <key>num_pais</key>
       <key>num_edo</key>
       <key>num_ciudad</key>
+      <key>num_municip</key>
     </keys_1>
     <keys_2>
-      <key>COD_MUNICIPIO</key>
       <key>COD_PAIS</key>
       <key>COD_ESTADO</key>
       <key>COD_CIUDAD</key>
+      <key>COD_MUNICIPIO</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -652,8 +621,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>80</yloc>
+      <xloc>384</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -677,12 +646,6 @@
       <key>
         <name>COD_PUNTO</name>
         <field>COD_PUNTO</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>FK_MUNICIPIO</name>
-        <field>FK_MUNICIPIO</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -729,7 +692,7 @@
       <value>
         <name>FK_MUNICIPIO</name>
         <rename>FK_MUNICIPIO</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>FEC_CREACION</name>
@@ -754,7 +717,7 @@
       <value>
         <name>ESTATUS_REGISTRO</name>
         <rename>ESTATUS_REGISTRO</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
     </lookup>
     <attributes/>
@@ -785,18 +748,21 @@
     <connection>Repositorio Movil</connection>
     <sql>SELECT
   m.ID_MUNICIPIO
-, m.COD_MUNICIPIO
-, e.COD_ESTADO
-, c.COD_CIUDAD
-, p.COD_PAIS
+,CAST(p.COD_PAIS as int) as COD_PAIS
+,CAST(e.COD_ESTADO as int) as COD_ESTADO
+,CAST(c.COD_CIUDAD as int) as COD_CIUDAD
+,CAST(m.COD_MUNICIPIO as int) as COD_MUNICIPIO
 FROM dbo.municipio m
-LEFT JOIN dbo.CIUDAD c ON
+INNER JOIN dbo.CIUDAD c ON
 c.ID_CIUDAD = m.FK_CIUDAD
-LEFT JOIN dbo.ESTADO e ON
+INNER JOIN dbo.ESTADO e ON
 e.ID_ESTADO=c.FK_ESTADO
-LEFT JOIN dbo.PAIS p ON
+INNER JOIN dbo.PAIS p ON
 e.FK_PAIS=p.ID_PAIS
-ORDER BY m.COD_MUNICIPIO</sql>
+ORDER BY CAST(p.COD_PAIS as int)
+,CAST(e.COD_ESTADO as int)
+,CAST(c.COD_CIUDAD as int)
+,CAST(m.COD_MUNICIPIO as int)</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -823,76 +789,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>COD_MUNICIPIO</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer MUNICIPIO repositorio</origin>
-        <comments>COD_MUNICIPIO</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>COD_ESTADO</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer MUNICIPIO repositorio</origin>
-        <comments>COD_ESTADO</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>COD_CIUDAD</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer MUNICIPIO repositorio</origin>
-        <comments>COD_CIUDAD</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -915,7 +812,76 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_ESTADO</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_ESTADO</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_CIUDAD</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_CIUDAD</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_MUNICIPIO</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_MUNICIPIO</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -929,7 +895,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>128</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -947,10 +913,10 @@ ORDER BY m.COD_MUNICIPIO</sql>
     </partitioning>
     <connection>DEMO</connection>
     <sql>SELECT DISTINCT [num_pto]
-      ,[num_pais]
-      ,[num_edo]
-      ,[num_ciudad]
-      ,[num_municip]
+      ,CAST([num_pais] as int) as num_pais
+      ,CAST([num_edo] as int) as num_edo
+	  ,CAST([num_ciudad] as int) as num_ciudad
+	  ,CAST([num_municip] as int) as num_municip
       ,TRIM([nombre_punto]) as nombre_punto
       ,punto.[num_cli]
       ,[cod_cia]
@@ -989,11 +955,11 @@ ORDER BY m.COD_MUNICIPIO</sql>
   list_r.num_ruta_oper = list_d.num_ruta_oper AND 
   list_r.num_listarec = list_d.num_listarec AND 
   list_r.fecha_listarec = list_d.fecha_listarec
---WHERE list_r.fecha_listarec ='2022-10-06') lrd
+--WHERE list_r.fecha_listarec ='2022-06-27') lrd
   WHERE list_d.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND status_lr = 11) lrd
   ON lrd.num_punto = punto.num_pto
   WHERE csle.pto_destino = punto.num_pto OR csle.pto_origen = punto.num_pto OR lrd.num_punto = punto.num_pto
-  ORDER BY num_municip</sql>
+  ORDER BY CAST([num_pais] as int), CAST([num_edo] as int), CAST([num_ciudad] as int), CAST([num_municip] as int)</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1020,7 +986,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1028,7 +994,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>num_pais</name>
-        <length>4</length>
+        <length>9</length>
         <precision>0</precision>
         <origin>Leer punto legado</origin>
         <comments>num_pais</comments>
@@ -1043,7 +1009,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1051,7 +1017,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>num_edo</name>
-        <length>4</length>
+        <length>9</length>
         <precision>0</precision>
         <origin>Leer punto legado</origin>
         <comments>num_edo</comments>
@@ -1066,7 +1032,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1074,7 +1040,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>num_ciudad</name>
-        <length>4</length>
+        <length>9</length>
         <precision>0</precision>
         <origin>Leer punto legado</origin>
         <comments>num_ciudad</comments>
@@ -1089,7 +1055,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1097,7 +1063,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>num_municip</name>
-        <length>4</length>
+        <length>9</length>
         <precision>0</precision>
         <origin>Leer punto legado</origin>
         <comments>num_municip</comments>
@@ -1112,7 +1078,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1135,7 +1101,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1158,7 +1124,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1181,7 +1147,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1204,7 +1170,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1227,7 +1193,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1250,7 +1216,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1273,7 +1239,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1296,7 +1262,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1319,7 +1285,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1342,7 +1308,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1365,7 +1331,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1388,7 +1354,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1411,7 +1377,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1434,7 +1400,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1457,7 +1423,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1480,7 +1446,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1503,7 +1469,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1526,7 +1492,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1549,7 +1515,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1572,7 +1538,7 @@ ORDER BY m.COD_MUNICIPIO</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1587,50 +1553,6 @@ ORDER BY m.COD_MUNICIPIO</sql>
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>16</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>UPDATE COD_CLIENTE en PUNTO repositorio</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Repositorio Movil</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>UPDATE dbo.punto SET FK_CLIENTE = (SELECT ID_CLIENTE FROM cliente WHERE COD_CLIENTE = ?) WHERE COD_PUNTO = ? ;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-      <argument>
-        <name>num_cli</name>
-      </argument>
-      <argument>
-        <name>COD_PUNTO</name>
-      </argument>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
       <yloc>16</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1750,6 +1672,81 @@ ORDER BY m.COD_MUNICIPIO</sql>
     <GUI>
       <xloc>384</xloc>
       <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Block this step until steps finish</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <steps>
+      <step>
+        <name>Guardar datos en PUNTO</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>588</xloc>
+      <yloc>370</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>UPDATE COD_CLIENTE en PUNTO repositorio</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Repositorio Movil</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>UPDATE punto SET FK_CLIENTE = (SELECT ID_CLIENTE FROM cliente WHERE COD_CLIENTE = ?) WHERE COD_PUNTO = ? ;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+      <argument>
+        <name>num_cli</name>
+      </argument>
+      <argument>
+        <name>COD_PUNTO</name>
+      </argument>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>716</xloc>
+      <yloc>162</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

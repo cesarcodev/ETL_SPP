@@ -440,10 +440,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>repositorio</database>
+    <database>REPOMOVIL</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>repomovil2</username>
+    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -547,10 +547,13 @@
       <schema_name/>
     </partitioning>
     <connection>Repositorio Movil</connection>
-    <sql>SELECT 
-TOP(1)ISNULL(MAX(FECHA_TRANSACCION),  DATEADD(day, -10, CAST(GETDATE() AS date))  ) as FECHA
+    <sql>SELECT TOP(1)
+ISNULL(
+	CONVERT(DATE, MAX(FECHA_TRANSACCION)) ,
+	DATEADD(day, -10, CAST(GETDATE() AS date)) 
+) as FECHA
 FROM TRACKING_MAESTRO
-where origen != 'PM24'</sql>
+where origen != 'PM24' </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -559,10 +562,10 @@ where origen != 'PM24'</sql>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
       <value-meta>
-        <type>Timestamp</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
         <name>FECHA</name>
-        <length>3</length>
+        <length>10</length>
         <precision>-1</precision>
         <origin>Leer La ultima fecha de transacción en REPOSITORIO</origin>
         <comments>FECHA</comments>
@@ -577,7 +580,7 @@ where origen != 'PM24'</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>

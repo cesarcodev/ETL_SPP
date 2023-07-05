@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>localhost</server>
+    <server>10.66.4.189</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>fuzcategui</username>
+    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>repositorio</database>
+    <database>REPOMOVIL</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>repomovil2</username>
+    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -606,10 +606,14 @@
     <step1>Leer CS legado</step1>
     <step2>Leer CS repositorio</step2>
     <keys_1>
+      <key>num_cli</key>
       <key>nro_comp</key>
+      <key>num_correl</key>
     </keys_1>
     <keys_2>
+      <key>COD_CLIENTE</key>
       <key>COD_CS</key>
+      <key>CORRELATIVO</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -640,6 +644,7 @@
     <step1>Ordenar por num_listarec, num_linea_lr y fecha_listarec_ent</step1>
     <step2>Leer PUNTO_LR repositorio</step2>
     <keys_1>
+      <key>num_cia_serv</key>
       <key>num_ofic_serv_ent</key>
       <key>num_ruta_oper_ent</key>
       <key>fecha_listarec_ent</key>
@@ -647,6 +652,7 @@
       <key>num_linea_lr_ent</key>
     </keys_1>
     <keys_2>
+      <key>COD_COMPANIA</key>
       <key>COD_OFICINA</key>
       <key>COD_RUTA</key>
       <key>FEC_LISTA</key>
@@ -662,8 +668,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>32</yloc>
+      <xloc>672</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -690,10 +696,16 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>FK_COMPROBANTE_SERVICIO</name>
+        <field>FK_COMPROBANTE_SERVICIO</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>FK_COMPROBANTE_SERVICIO</name>
         <rename>FK_COMPROBANTE_SERVICIO</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>FK_PUNTOLR</name>
@@ -708,7 +720,7 @@
       <value>
         <name>FEC_MODIFICACION</name>
         <rename>FEC_MODIFICACION</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>USUARIO_CREACION</name>
@@ -766,9 +778,11 @@
       ,csle.num_linea_lr_ent
       ,csle.nro_comp
 ,fecha_listarec_ent
+,num_cia_serv
 ,num_ofic_serv_ent
 ,num_ruta_oper_ent
 ,num_cli
+,csle.num_correl
 , 'Sistema' as USUARIO_CREACION
 , 'Sistema' as USUARIO_MODIFICACION
 , CURRENT_TIMESTAMP as FEC_CREACION 
@@ -785,9 +799,10 @@
 	AND lr.num_listarec = csle.num_listarec_ent 
 	AND lr.num_cia_serv = csle.cia_serv_ent
 	
-   WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lr.status_lr=11
+WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lr.status_lr=11
+--WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
  --WHERE lr.fecha_listarec = '2023-01-06'
-order by csle.nro_comp</sql>
+order by  num_cli, csle.nro_comp, csle.num_correl</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -814,7 +829,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -837,7 +852,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -860,7 +875,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -883,7 +898,30 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>num_cia_serv</name>
+        <length>2</length>
+        <precision>-1</precision>
+        <origin>Leer CS legado</origin>
+        <comments>num_cia_serv</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -906,7 +944,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -929,7 +967,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -952,7 +990,30 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_correl</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Leer CS legado</origin>
+        <comments>num_correl</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -975,7 +1036,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -998,7 +1059,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1021,7 +1082,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1044,7 +1105,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1067,7 +1128,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1090,7 +1151,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1113,7 +1174,7 @@ order by csle.nro_comp</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1147,9 +1208,10 @@ order by csle.nro_comp</sql>
     <sql>SELECT
   ID_COMPROBANTE_SERVICIO
 , COD_CS
+, CAST(COD_CLIENTE AS INT) COD_CLIENTE
+, CORRELATIVO
 FROM dbo.comprobante_servicio
-ORDER BY COD_CS
-</sql>
+ORDER BY CAST(COD_CLIENTE AS INT), COD_CS ,CORRELATIVO</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1203,6 +1265,52 @@ ORDER BY COD_CS
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_CLIENTE</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer CS repositorio</origin>
+        <comments>COD_CLIENTE</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>CORRELATIVO</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer CS repositorio</origin>
+        <comments>CORRELATIVO</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -1213,7 +1321,7 @@ ORDER BY COD_CS
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>64</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1239,15 +1347,19 @@ ORDER BY COD_CS
 , FEC_LISTA
 , oficina.COD_OFICINA
 , ruta.COD_RUTA
+, COMPANIA.COD_COMPANIA
 FROM dbo.punto_lr as plr
-JOIN lista_recorrido as lista_recorrido 
+LEFT JOIN lista_recorrido as lista_recorrido 
 ON lista_recorrido.ID_LISTA_RECORRIDO = plr.FK_LISTA_RECORRIDO
-JOIN ruta as ruta 
+LEFT JOIN ruta as ruta 
 ON ruta.ID_RUTA = lista_recorrido.FK_RUTA
-JOIN oficina as oficina
+LEFT JOIN oficina as oficina
 ON oficina.ID_OFICINA = ruta.FK_OFICINA
+LEFT JOIN COMPANIA
+ON COMPANIA.ID_COMPANIA = oficina.FK_COMPANIA
+-- WHERE lista_recorrido.FEC_LISTA = CURRENT_TIMESTAMP
 --ORDER BY oficina.COD_OFICINA, ruta.COD_RUTA, date_format(lista_recorrido.FEC_LISTA, "%Y-%m-%d"), lista_recorrido.NRO_LISTA, plr.NUM_LINEA;
-ORDER BY oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, lista_recorrido.NRO_LISTA, plr.NUM_LINEA;</sql>
+ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, lista_recorrido.NRO_LISTA, plr.NUM_LINEA;</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1393,6 +1505,29 @@ ORDER BY oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, lista_recorrido.NRO_LIST
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>COD_COMPANIA</name>
+        <length>5</length>
+        <precision>-1</precision>
+        <origin>Leer PUNTO_LR repositorio</origin>
+        <comments>COD_COMPANIA</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -1403,8 +1538,8 @@ ORDER BY oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, lista_recorrido.NRO_LIST
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>240</yloc>
+      <xloc>112</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1427,6 +1562,14 @@ ORDER BY oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, lista_recorrido.NRO_LIST
     <compress_variable/>
     <unique_rows>N</unique_rows>
     <fields>
+      <field>
+        <name>num_cia_serv</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
       <field>
         <name>num_ofic_serv_ent</name>
         <ascending>Y</ascending>
@@ -1477,7 +1620,7 @@ ORDER BY oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, lista_recorrido.NRO_LIST
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
+      <xloc>528</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>

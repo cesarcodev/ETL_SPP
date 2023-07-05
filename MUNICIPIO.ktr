@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>localhost</server>
+    <server>10.66.4.189</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>fuzcategui</username>
+    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>repositorio</database>
+    <database>REPOMOVIL</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>repomovil2</username>
+    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -562,52 +562,22 @@
     </hop>
     <hop>
       <from>Leer MUNICIPIO legado</from>
-      <to>Buscar fk_estado y fk_ciudad</to>
+      <to>Buscar fk_ciudad</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Buscar fk_estado y fk_ciudad</from>
+      <from>Buscar fk_ciudad</from>
       <to>Validar datos</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Buscar num_ciudad</from>
-      <to>Ordenar por num_edo 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leer CIUDAD legado</from>
-      <to>Buscar num_ciudad</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Leer CIUDAD repositorio</from>
-      <to>Buscar num_ciudad</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Ordenar por num_edo 2</from>
-      <to>Buscar num_estado 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Ordenar por num_edo y num_ciudad</from>
-      <to>Buscar fk_estado y fk_ciudad</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Buscar num_estado 2</from>
-      <to>Ordenar por num_edo y num_ciudad</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leer ESTADO repositorio</from>
-      <to>Buscar num_estado 2</to>
+      <to>Buscar fk_ciudad</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Buscar fk_estado y fk_ciudad</name>
+    <name>Buscar fk_ciudad</name>
     <type>MergeJoin</type>
     <description/>
     <distribute>Y</distribute>
@@ -617,18 +587,18 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>LEFT OUTER</join_type>
+    <join_type>INNER</join_type>
     <step1>Leer MUNICIPIO legado</step1>
-    <step2>Ordenar por num_edo y num_ciudad</step2>
+    <step2>Leer CIUDAD repositorio</step2>
     <keys_1>
+      <key>num_pais</key>
       <key>num_edo</key>
       <key>num_ciudad</key>
-      <key>num_pais</key>
     </keys_1>
     <keys_2>
+      <key>COD_PAIS</key>
       <key>COD_ESTADO</key>
       <key>COD_CIUDAD</key>
-      <key>COD_PAIS</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -641,80 +611,6 @@
     <GUI>
       <xloc>656</xloc>
       <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Buscar num_ciudad</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>Leer CIUDAD legado</step1>
-    <step2>Leer CIUDAD repositorio</step2>
-    <keys_1>
-      <key>num_ciudad</key>
-      <key>num_edo</key>
-      <key>num_pais</key>
-    </keys_1>
-    <keys_2>
-      <key>COD_CIUDAD</key>
-      <key>COD_ESTADO</key>
-      <key>COD_PAIS</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Buscar num_estado 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>Leer ESTADO repositorio</step1>
-    <step2>Ordenar por num_edo 2</step2>
-    <keys_1>
-      <key>COD_ESTADO</key>
-      <key>FK_PAIS</key>
-    </keys_1>
-    <keys_2>
-      <key>num_edo</key>
-      <key>ID_PAIS</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>512</xloc>
-      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -741,6 +637,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>FK_CIUDAD</name>
+        <field>FK_CIUDAD</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>NB_MUNICIPIO</name>
         <rename>NB_MUNICIPIO</rename>
@@ -764,7 +666,7 @@
       <value>
         <name>FEC_MODIFICACION</name>
         <rename>FEC_MODIFICACION</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>USUARIO_CREACION</name>
@@ -797,140 +699,6 @@
     </GUI>
   </step>
   <step>
-    <name>Leer CIUDAD legado</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DEMO</connection>
-    <sql>SELECT
-  "num_pais"
-, "num_edo"
-, "num_ciudad"
-, "nombre_ciudad"
-FROM "dbo"."ciudad"
-ORDER BY num_ciudad
-</sql>
-    <limit/>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>num_pais</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Leer CIUDAD legado</origin>
-        <comments>num_pais</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>num_edo</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Leer CIUDAD legado</origin>
-        <comments>num_edo</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>num_ciudad</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Leer CIUDAD legado</origin>
-        <comments>num_ciudad</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>nombre_ciudad</name>
-        <length>45</length>
-        <precision>-1</precision>
-        <origin>Leer CIUDAD legado</origin>
-        <comments>nombre_ciudad</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Leer CIUDAD repositorio</name>
     <type>TableInput</type>
     <description/>
@@ -942,19 +710,17 @@ ORDER BY num_ciudad
       <schema_name/>
     </partitioning>
     <connection>Repositorio Movil</connection>
-    <sql>SELECT 
-	c.ID_CIUDAD,
-	c.NB_CIUDAD,
-	c.COD_CIUDAD,
-	e.COD_ESTADO,
-	p.COD_PAIS,
-	p.ID_PAIS
-  FROM dbo.CIUDAD c
-  left join ESTADO e
-  ON e.COD_ESTADO = c.FK_ESTADO
-   left join pais p
-  ON p.ID_PAIS = e.FK_PAIS
-ORDER BY c.COD_CIUDAD</sql>
+    <sql>SELECT
+  ID_CIUDAD
+, COD_CIUDAD
+, COD_ESTADO
+, COD_PAIS
+FROM dbo.ciudad
+JOIN ESTADO 
+ON ESTADO.ID_ESTADO = CIUDAD.FK_ESTADO
+JOIN PAIS
+ON PAIS.ID_PAIS = ESTADO.FK_PAIS
+ORDER BY COD_PAIS, COD_ESTADO, COD_CIUDAD</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -968,7 +734,7 @@ ORDER BY c.COD_CIUDAD</sql>
         <name>ID_CIUDAD</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Leer CIUDAD repositorio</origin>
+        <origin>Leer ESTADO repositorio</origin>
         <comments>ID_CIUDAD</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -981,30 +747,7 @@ ORDER BY c.COD_CIUDAD</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>NB_CIUDAD</name>
-        <length>50</length>
-        <precision>-1</precision>
-        <origin>Leer CIUDAD repositorio</origin>
-        <comments>NB_CIUDAD</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1014,7 +757,7 @@ ORDER BY c.COD_CIUDAD</sql>
         <name>COD_CIUDAD</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Leer CIUDAD repositorio</origin>
+        <origin>Leer ESTADO repositorio</origin>
         <comments>COD_CIUDAD</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1027,7 +770,7 @@ ORDER BY c.COD_CIUDAD</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1037,7 +780,7 @@ ORDER BY c.COD_CIUDAD</sql>
         <name>COD_ESTADO</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Leer CIUDAD repositorio</origin>
+        <origin>Leer ESTADO repositorio</origin>
         <comments>COD_ESTADO</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1050,7 +793,7 @@ ORDER BY c.COD_CIUDAD</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1060,7 +803,7 @@ ORDER BY c.COD_CIUDAD</sql>
         <name>COD_PAIS</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Leer CIUDAD repositorio</origin>
+        <origin>Leer ESTADO repositorio</origin>
         <comments>COD_PAIS</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1073,30 +816,7 @@ ORDER BY c.COD_CIUDAD</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>ID_PAIS</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer CIUDAD repositorio</origin>
-        <comments>ID_PAIS</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1110,141 +830,8 @@ ORDER BY c.COD_CIUDAD</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Leer ESTADO repositorio</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Repositorio Movil</connection>
-    <sql>SELECT
-  ID_ESTADO
-, NB_ESTADO
-, COD_ESTADO
-, FK_PAIS
-FROM dbo.estado
-ORDER BY COD_ESTADO</sql>
-    <limit/>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>ID_ESTADO</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer ESTADO repositorio</origin>
-        <comments>ID_ESTADO</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>NB_ESTADO</name>
-        <length>50</length>
-        <precision>-1</precision>
-        <origin>Leer ESTADO repositorio</origin>
-        <comments>NB_ESTADO</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>COD_ESTADO</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer ESTADO repositorio</origin>
-        <comments>COD_ESTADO</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>FK_PAIS</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer ESTADO repositorio</origin>
-        <comments>FK_PAIS</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>256</yloc>
+      <xloc>96</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1272,7 +859,7 @@ ORDER BY COD_ESTADO</sql>
 , CURRENT_TIMESTAMP as FEC_MODIFICACION 
 , 1 as ESTATUS_REGISTRO
 FROM "dbo"."municipio"
-ORDER BY num_edo, num_ciudad</sql>
+ORDER BY num_pais, num_edo, num_ciudad</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1299,7 +886,7 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1322,7 +909,7 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1345,7 +932,7 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1368,7 +955,7 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1391,7 +978,7 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1414,7 +1001,7 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1437,7 +1024,7 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1460,7 +1047,7 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1483,18 +1070,18 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>FK_ESTATUS</name>
+        <name>ESTATUS_REGISTRO</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Leer MUNICIPIO legado</origin>
-        <comments>FK_ESTATUS</comments>
+        <comments>ESTATUS_REGISTRO</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -1506,7 +1093,7 @@ ORDER BY num_edo, num_ciudad</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_419</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1522,98 +1109,6 @@ ORDER BY num_edo, num_ciudad</sql>
     <GUI>
       <xloc>96</xloc>
       <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Ordenar por num_edo 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>num_edo</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Ordenar por num_edo y num_ciudad</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_ESTADO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>COD_CIUDAD</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>656</xloc>
-      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1643,45 +1138,43 @@ ORDER BY num_edo, num_ciudad</sql>
       </field>
       <field>
         <name>FEC_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>num_pais</name>
+        <rename/>
       </field>
       <field>
         <name>num_edo</name>
+        <rename/>
       </field>
       <field>
         <name>num_ciudad</name>
+        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
-      </field>
-      <field>
-        <name>ID_ESTADO</name>
-      </field>
-      <field>
-        <name>NB_ESTADO</name>
+        <rename/>
       </field>
       <field>
         <name>COD_ESTADO</name>
-      </field>
-      <field>
-        <name>nombre_ciudad</name>
-      </field>
-      <field>
-        <name>NB_CIUDAD</name>
+        <rename/>
       </field>
       <field>
         <name>COD_CIUDAD</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>

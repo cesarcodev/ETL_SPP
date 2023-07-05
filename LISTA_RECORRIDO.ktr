@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>localhost</server>
+    <server>10.66.4.189</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>fuzcategui</username>
+    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>repositorio</database>
+    <database>REPOMOVIL</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>repomovil2</username>
+    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -561,26 +561,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leer OFICINA repositorio</from>
-      <to>Buscar fk_oficina</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leer RUTA repositorio</from>
-      <to>Buscar fk_oficina</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Buscar fk_oficina</from>
-      <to>Ordenar por COD_RUTA y COD_OFICINA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Ordenar por COD_RUTA y COD_OFICINA</from>
-      <to>Buscar fk_ruta</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Leer lista_recorrido legado</from>
       <to>Buscar fk_ruta</to>
       <enabled>Y</enabled>
@@ -610,6 +590,11 @@
       <to>Log</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Leer RUTA repositorio</from>
+      <to>Buscar fk_ruta</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Block this step until steps finish</name>
@@ -637,42 +622,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Buscar fk_oficina</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>Leer RUTA repositorio</step1>
-    <step2>Leer OFICINA repositorio</step2>
-    <keys_1>
-      <key>FK_OFICINA</key>
-    </keys_1>
-    <keys_2>
-      <key>ID_OFICINA</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>256</xloc>
-      <yloc>304</yloc>
+      <xloc>1248</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -689,14 +640,16 @@
     </partitioning>
     <join_type>LEFT OUTER</join_type>
     <step1>Leer lista_recorrido legado</step1>
-    <step2>Ordenar por COD_RUTA y COD_OFICINA</step2>
+    <step2>Leer RUTA repositorio</step2>
     <keys_1>
-      <key>num_ruta_oper</key>
+      <key>num_cia_serv</key>
       <key>num_ofic_serv</key>
+      <key>num_ruta_oper</key>
     </keys_1>
     <keys_2>
-      <key>COD_RUTA</key>
+      <key>COD_COMPANIA</key>
       <key>COD_OFICINA</key>
+      <key>COD_RUTA</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -809,7 +762,7 @@
       <value>
         <name>FK_RUTA</name>
         <rename>FK_RUTA</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>FEC_LISTA</name>
@@ -829,7 +782,7 @@
       <value>
         <name>FEC_MODIFICACION</name>
         <rename>FEC_MODIFICACION</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>USUARIO_CREACION</name>
@@ -861,166 +814,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Leer OFICINA repositorio</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Repositorio Movil</connection>
-    <sql>SELECT
-  ID_OFICINA
-, COD_OFICINA
-, NB_OFICINA
-, FEC_ESTATUS
-, FK_COMPANIA
-FROM dbo.oficina
-ORDER BY ID_OFICINA
-</sql>
-    <limit/>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>ID_OFICINA</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer OFICINA repositorio</origin>
-        <comments>ID_OFICINA</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>COD_OFICINA</name>
-        <length>5</length>
-        <precision>-1</precision>
-        <origin>Leer OFICINA repositorio</origin>
-        <comments>COD_OFICINA</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>NB_OFICINA</name>
-        <length>50</length>
-        <precision>-1</precision>
-        <origin>Leer OFICINA repositorio</origin>
-        <comments>NB_OFICINA</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>FEC_ESTATUS</name>
-        <length>3</length>
-        <precision>-1</precision>
-        <origin>Leer OFICINA repositorio</origin>
-        <comments>FEC_ESTATUS</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>FK_COMPANIA</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer OFICINA repositorio</origin>
-        <comments>FK_COMPANIA</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>352</yloc>
+      <xloc>960</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1039,11 +834,14 @@ ORDER BY ID_OFICINA
     <sql>SELECT
   ID_RUTA
 , COD_RUTA
-, NB_RUTA
-, FEC_ESTATUS
-, FK_OFICINA
+, COD_OFICINA
+, COD_COMPANIA
 FROM dbo.ruta
-ORDER BY FK_OFICINA
+JOIN OFICINA
+ON OFICINA.ID_OFICINA = ruta.FK_OFICINA
+JOIN COMPANIA
+ON COMPANIA.ID_COMPANIA = OFICINA.FK_COMPANIA
+ORDER BY COD_COMPANIA, COD_OFICINA, COD_RUTA
 </sql>
     <limit/>
     <lookup/>
@@ -1101,11 +899,11 @@ ORDER BY FK_OFICINA
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>NB_RUTA</name>
-        <length>100</length>
+        <name>COD_OFICINA</name>
+        <length>5</length>
         <precision>-1</precision>
         <origin>Leer RUTA repositorio</origin>
-        <comments>NB_RUTA</comments>
+        <comments>COD_OFICINA</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -1122,37 +920,14 @@ ORDER BY FK_OFICINA
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Timestamp</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>FEC_ESTATUS</name>
-        <length>3</length>
+        <name>COD_COMPANIA</name>
+        <length>5</length>
         <precision>-1</precision>
         <origin>Leer RUTA repositorio</origin>
-        <comments>FEC_ESTATUS</comments>
+        <comments>COD_COMPANIA</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>FK_OFICINA</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer RUTA repositorio</origin>
-        <comments>FK_OFICINA</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -1177,8 +952,8 @@ ORDER BY FK_OFICINA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>256</yloc>
+      <xloc>112</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1226,7 +1001,7 @@ ORDER BY FK_OFICINA
 --where fecha_listarec = '2022-09-30'
 where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
 
-ORDER BY num_ruta_oper, num_ofic_serv</sql>
+ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1842,8 +1617,8 @@ ORDER BY num_ruta_oper, num_ofic_serv</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>96</yloc>
+      <xloc>112</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1906,56 +1681,6 @@ ORDER BY num_ruta_oper, num_ofic_serv</sql>
     </remotesteps>
     <GUI>
       <xloc>976</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Ordenar por COD_RUTA y COD_OFICINA</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>COD_RUTA</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>COD_OFICINA</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>480</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2036,6 +1761,7 @@ ORDER BY num_ruta_oper, num_ofic_serv</sql>
       </field>
       <field>
         <name>num_unidad</name>
+        <rename/>
       </field>
       <field>
         <name>nro_llaveros</name>
@@ -2051,54 +1777,47 @@ ORDER BY num_ruta_oper, num_ofic_serv</sql>
       </field>
       <field>
         <name>COD_RUTA</name>
-      </field>
-      <field>
-        <name>NB_RUTA</name>
-      </field>
-      <field>
-        <name>FEC_ESTATUS</name>
-      </field>
-      <field>
-        <name>FK_OFICINA</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
-      </field>
-      <field>
-        <name>ID_OFICINA</name>
+        <rename/>
       </field>
       <field>
         <name>COD_OFICINA</name>
-      </field>
-      <field>
-        <name>NB_OFICINA</name>
-      </field>
-      <field>
-        <name>FK_COMPANIA</name>
+        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
+        <rename/>
       </field>
       <field>
         <name>FK_ESTATUS</name>
+        <rename/>
       </field>
       <field>
         <name>FK_LOG_TIPO</name>
+        <rename/>
       </field>
       <field>
         <name>DESCRIPCION</name>
+        <rename/>
       </field>
       <field>
         <name>ID_REGISTRO</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -2111,8 +1830,8 @@ ORDER BY num_ruta_oper, num_ofic_serv</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>96</yloc>
+      <xloc>720</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

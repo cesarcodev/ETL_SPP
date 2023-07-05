@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>OFICINA</name>
+    <name>TODO_PUNTO_PRIMERO</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -428,9 +428,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/03/08 11:33:18.494</created_date>
+    <created_date>2023/06/19 12:53:15.925</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/03/08 11:33:18.494</modified_date>
+    <modified_date>2023/06/19 12:53:15.925</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -556,28 +556,38 @@
   </connection>
   <order>
     <hop>
-      <from>Validar datos</from>
-      <to>Guardar datos en OFICINA</to>
+      <from>Buscar fk_municipio 2</from>
+      <to>Validar datos 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leer OFICINA legado</from>
-      <to>Buscar fk_compania</to>
+      <from>Leer MUNICIPIO repositorio 2</from>
+      <to>Buscar fk_municipio 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Leer COMPANIA repositorio</from>
-      <to>Buscar fk_compania</to>
+      <from>Leer punto legado 2</from>
+      <to>Ordenar filas</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Buscar fk_compania</from>
-      <to>Validar datos</to>
+      <from>Ordenar filas</from>
+      <to>Buscar fk_municipio 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Validar datos 2</from>
+      <to>Blocking step</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step</from>
+      <to>Guardar datos en PUNTO 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Buscar fk_compania</name>
+    <name>Buscar fk_municipio 2</name>
     <type>MergeJoin</type>
     <description/>
     <distribute>Y</distribute>
@@ -587,14 +597,20 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>INNER</join_type>
-    <step1>Leer OFICINA legado</step1>
-    <step2>Leer COMPANIA repositorio</step2>
+    <join_type>LEFT OUTER</join_type>
+    <step1>Ordenar filas</step1>
+    <step2>Leer MUNICIPIO repositorio 2</step2>
     <keys_1>
-      <key>cod_cia</key>
+      <key>num_pais</key>
+      <key>num_edo</key>
+      <key>num_ciudad</key>
+      <key>num_municip</key>
     </keys_1>
     <keys_2>
-      <key>COD_COMPANIA</key>
+      <key>COD_PAIS</key>
+      <key>COD_ESTADO</key>
+      <key>COD_CIUDAD</key>
+      <key>COD_MUNICIPIO</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -605,13 +621,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>64</yloc>
+      <xloc>432</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Guardar datos en OFICINA</name>
+    <name>Guardar datos en PUNTO 2</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -622,41 +638,70 @@
       <schema_name/>
     </partitioning>
     <connection>Repositorio Movil</connection>
-    <commit>100</commit>
+    <commit>140000</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>dbo</schema>
-      <table>oficina</table>
+      <table>punto</table>
       <key>
-        <name>COD_OFICINA</name>
-        <field>COD_OFICINA</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>FK_COMPANIA</name>
-        <field>FK_COMPANIA</field>
+        <name>COD_PUNTO</name>
+        <field>COD_PUNTO</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>COD_OFICINA</name>
-        <rename>COD_OFICINA</rename>
+        <name>COD_PUNTO</name>
+        <rename>COD_PUNTO</rename>
         <update>N</update>
       </value>
       <value>
-        <name>NB_OFICINA</name>
-        <rename>NB_OFICINA</rename>
+        <name>NOMBRE_PUNTO</name>
+        <rename>NOMBRE_PUNTO</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>FK_COMPANIA</name>
-        <rename>FK_COMPANIA</rename>
+        <name>CENTRO_POB</name>
+        <rename>CENTRO_POB</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>VIA</name>
+        <rename>VIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>EDIFICACION</name>
+        <rename>EDIFICACION</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>OFICINA</name>
+        <rename>OFICINA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>PISO</name>
+        <rename>PISO</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>REFERENCIA</name>
+        <rename>REFERENCIA</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>FK_MUNICIPIO</name>
+        <rename>FK_MUNICIPIO</rename>
         <update>N</update>
       </value>
       <value>
-        <name>ESTATUS_REGISTRO</name>
-        <rename>ESTATUS_REGISTRO</rename>
+        <name>FEC_CREACION</name>
+        <rename>FEC_CREACION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>FEC_MODIFICACION</name>
+        <rename>FEC_MODIFICACION</rename>
         <update>N</update>
       </value>
       <value>
@@ -670,13 +715,8 @@
         <update>N</update>
       </value>
       <value>
-        <name>FEC_CREACION</name>
-        <rename>FEC_CREACION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>FEC_MODIFICACION</name>
-        <rename>FEC_MODIFICACION</rename>
+        <name>ESTATUS_REGISTRO</name>
+        <rename>ESTATUS_REGISTRO</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -689,13 +729,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>64</yloc>
+      <xloc>848</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Leer COMPANIA repositorio</name>
+    <name>Leer MUNICIPIO repositorio 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -707,13 +747,22 @@
     </partitioning>
     <connection>Repositorio Movil</connection>
     <sql>SELECT
-  ID_COMPANIA
-, COD_COMPANIA
-, NB_CORTO_COMPANIA
-, NB_COMPANIA
-FROM dbo.compania
-ORDER BY COD_COMPANIA
-</sql>
+  m.ID_MUNICIPIO
+,CAST(p.COD_PAIS as int) as COD_PAIS
+,CAST(e.COD_ESTADO as int) as COD_ESTADO
+,CAST(c.COD_CIUDAD as int) as COD_CIUDAD
+,CAST(m.COD_MUNICIPIO as int) as COD_MUNICIPIO
+FROM dbo.municipio m
+INNER JOIN dbo.CIUDAD c ON
+c.ID_CIUDAD = m.FK_CIUDAD
+INNER JOIN dbo.ESTADO e ON
+e.ID_ESTADO=c.FK_ESTADO
+INNER JOIN dbo.PAIS p ON
+e.FK_PAIS=p.ID_PAIS
+ORDER BY CAST(p.COD_PAIS as int)
+,CAST(e.COD_ESTADO as int)
+,CAST(c.COD_CIUDAD as int)
+,CAST(m.COD_MUNICIPIO as int)</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -724,11 +773,11 @@ ORDER BY COD_COMPANIA
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>ID_COMPANIA</name>
+        <name>ID_MUNICIPIO</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Leer COMPANIA repositorio</origin>
-        <comments>ID_COMPANIA</comments>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>ID_MUNICIPIO</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -745,14 +794,14 @@ ORDER BY COD_COMPANIA
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>COD_COMPANIA</name>
-        <length>5</length>
-        <precision>-1</precision>
-        <origin>Leer COMPANIA repositorio</origin>
-        <comments>COD_COMPANIA</comments>
-        <conversion_Mask/>
+        <name>COD_PAIS</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_PAIS</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -768,14 +817,14 @@ ORDER BY COD_COMPANIA
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>NB_CORTO_COMPANIA</name>
-        <length>10</length>
-        <precision>-1</precision>
-        <origin>Leer COMPANIA repositorio</origin>
-        <comments>NB_CORTO_COMPANIA</comments>
-        <conversion_Mask/>
+        <name>COD_ESTADO</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_ESTADO</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -791,14 +840,37 @@ ORDER BY COD_COMPANIA
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>NB_COMPANIA</name>
-        <length>100</length>
-        <precision>-1</precision>
-        <origin>Leer COMPANIA repositorio</origin>
-        <comments>NB_COMPANIA</comments>
-        <conversion_Mask/>
+        <name>COD_CIUDAD</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_CIUDAD</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_MUNICIPIO</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer MUNICIPIO repositorio</origin>
+        <comments>COD_MUNICIPIO</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -823,13 +895,13 @@ ORDER BY COD_COMPANIA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>112</yloc>
+      <xloc>224</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Leer OFICINA legado</name>
+    <name>Leer punto legado 2</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -840,16 +912,35 @@ ORDER BY COD_COMPANIA
       <schema_name/>
     </partitioning>
     <connection>DEMO</connection>
-    <sql>SELECT [cod_cia]
-      ,TRIM([cod_ofic]) as cod_ofic
-      ,TRIM([nombre_oficina]) as nombre_oficina
-, 'Sistema' as USUARIO_CREACION
-, 'Sistema' as USUARIO_MODIFICACION
-, CURRENT_TIMESTAMP as FEC_CREACION 
-, CURRENT_TIMESTAMP as FEC_MODIFICACION 
-, 1 as ESTATUS_REGISTRO
-  FROM [dbo].[oficina]
-  ORDER BY cod_cia</sql>
+    <sql>SELECT  TOP 50 PERCENT [num_pto]
+      , CAST([num_pais] as int) num_pais
+      , CAST([num_edo] as int) num_edo
+      , CAST([num_ciudad] as int) num_ciudad
+      , CAST([num_municip] as int) num_municip
+      ,[nombre_punto]
+      ,[num_cli]
+      ,[cod_cia]
+      ,[cod_ofic]
+      ,[num_banco]
+      ,[centro_pob]
+      ,[via]
+      ,[edificacion]
+      ,[oficina]
+      ,[piso]
+      ,[referencia]
+      ,[tipo_punto_cliente]
+      ,[tipo_punto_centro]
+      ,[ind_activo]
+      ,[fecha_canc]
+	  , 'Sistema' as USUARIO_CREACION
+	  , 'Sistema' as USUARIO_MODIFICACION
+	  , CURRENT_TIMESTAMP as FEC_CREACION 
+	  , CURRENT_TIMESTAMP as FEC_MODIFICACION 
+	  , 1 as ESTATUS_REGISTRO
+  FROM [movil24].[dbo].[punto]
+  --ORDER BY  CAST([num_pais] as int), CAST([num_edo] as int), CAST([num_ciudad] as int), CAST([num_municip] as int)
+ORDER BY num_pto asc
+	</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -858,12 +949,173 @@ ORDER BY COD_COMPANIA
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
       <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_pto</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>num_pto</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_pais</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>num_pais</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_edo</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>num_edo</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_ciudad</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>num_ciudad</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_municip</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>num_municip</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>nombre_punto</name>
+        <length>60</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>nombre_punto</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_cli</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>num_cli</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>cod_cia</name>
         <length>2</length>
         <precision>-1</precision>
-        <origin>Leer OFICINA legado</origin>
+        <origin>Leer punto legado 2</origin>
         <comments>cod_cia</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -886,8 +1138,54 @@ ORDER BY COD_COMPANIA
         <name>cod_ofic</name>
         <length>2</length>
         <precision>-1</precision>
-        <origin>Leer OFICINA legado</origin>
+        <origin>Leer punto legado 2</origin>
         <comments>cod_ofic</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_banco</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>num_banco</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>centro_pob</name>
+        <length>30</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>centro_pob</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -906,11 +1204,195 @@ ORDER BY COD_COMPANIA
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>nombre_oficina</name>
-        <length>45</length>
+        <name>via</name>
+        <length>60</length>
         <precision>-1</precision>
-        <origin>Leer OFICINA legado</origin>
-        <comments>nombre_oficina</comments>
+        <origin>Leer punto legado 2</origin>
+        <comments>via</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>edificacion</name>
+        <length>40</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>edificacion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>oficina</name>
+        <length>15</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>oficina</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>piso</name>
+        <length>15</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>piso</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>referencia</name>
+        <length>60</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>referencia</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>tipo_punto_cliente</name>
+        <length>1</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>tipo_punto_cliente</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>tipo_punto_centro</name>
+        <length>1</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>tipo_punto_centro</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>ind_activo</name>
+        <length>1</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>ind_activo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>fecha_canc</name>
+        <length>10</length>
+        <precision>-1</precision>
+        <origin>Leer punto legado 2</origin>
+        <comments>fecha_canc</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -932,7 +1414,7 @@ ORDER BY COD_COMPANIA
         <name>USUARIO_CREACION</name>
         <length>7</length>
         <precision>-1</precision>
-        <origin>Leer OFICINA legado</origin>
+        <origin>Leer punto legado 2</origin>
         <comments>USUARIO_CREACION</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -955,7 +1437,7 @@ ORDER BY COD_COMPANIA
         <name>USUARIO_MODIFICACION</name>
         <length>7</length>
         <precision>-1</precision>
-        <origin>Leer OFICINA legado</origin>
+        <origin>Leer punto legado 2</origin>
         <comments>USUARIO_MODIFICACION</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -978,7 +1460,7 @@ ORDER BY COD_COMPANIA
         <name>FEC_CREACION</name>
         <length>3</length>
         <precision>-1</precision>
-        <origin>Leer OFICINA legado</origin>
+        <origin>Leer punto legado 2</origin>
         <comments>FEC_CREACION</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1001,7 +1483,7 @@ ORDER BY COD_COMPANIA
         <name>FEC_MODIFICACION</name>
         <length>3</length>
         <precision>-1</precision>
-        <origin>Leer OFICINA legado</origin>
+        <origin>Leer punto legado 2</origin>
         <comments>FEC_MODIFICACION</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
@@ -1024,7 +1506,7 @@ ORDER BY COD_COMPANIA
         <name>ESTATUS_REGISTRO</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Leer OFICINA legado</origin>
+        <origin>Leer punto legado 2</origin>
         <comments>ESTATUS_REGISTRO</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -1051,13 +1533,79 @@ ORDER BY COD_COMPANIA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>16</yloc>
+      <xloc>96</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Validar datos</name>
+    <name>Ordenar filas</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>num_pais</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>num_edo</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>num_ciudad</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>num_municip</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Validar datos 2</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1069,19 +1617,49 @@ ORDER BY COD_COMPANIA
     </partitioning>
     <fields>
       <field>
-        <name>cod_ofic</name>
-        <rename>COD_OFICINA</rename>
+        <name>num_pto</name>
+        <rename>COD_PUNTO</rename>
       </field>
       <field>
-        <name>nombre_oficina</name>
-        <rename>NB_OFICINA</rename>
+        <name>nombre_punto</name>
+        <rename>NOMBRE_PUNTO</rename>
       </field>
       <field>
-        <name>ID_COMPANIA</name>
-        <rename>FK_COMPANIA</rename>
+        <name>centro_pob</name>
+        <rename>CENTRO_POB</rename>
       </field>
       <field>
-        <name>ESTATUS_REGISTRO</name>
+        <name>via</name>
+        <rename>VIA</rename>
+      </field>
+      <field>
+        <name>edificacion</name>
+        <rename>EDIFICACION</rename>
+      </field>
+      <field>
+        <name>oficina</name>
+        <rename>OFICINA</rename>
+      </field>
+      <field>
+        <name>piso</name>
+        <rename>PISO</rename>
+      </field>
+      <field>
+        <name>referencia</name>
+        <rename>REFERENCIA</rename>
+      </field>
+      <field>
+        <name>ID_MUNICIPIO</name>
+        <rename>FK_MUNICIPIO</rename>
+      </field>
+      <field>
+        <name>num_cli</name>
+      </field>
+      <field>
+        <name>FEC_CREACION</name>
+      </field>
+      <field>
+        <name>FEC_MODIFICACION</name>
       </field>
       <field>
         <name>USUARIO_CREACION</name>
@@ -1090,10 +1668,43 @@ ORDER BY COD_COMPANIA
         <name>USUARIO_MODIFICACION</name>
       </field>
       <field>
-        <name>FEC_CREACION</name>
+        <name>num_pais</name>
       </field>
       <field>
-        <name>FEC_MODIFICACION</name>
+        <name>num_edo</name>
+      </field>
+      <field>
+        <name>num_ciudad</name>
+      </field>
+      <field>
+        <name>num_municip</name>
+      </field>
+      <field>
+        <name>cod_cia</name>
+      </field>
+      <field>
+        <name>cod_ofic</name>
+      </field>
+      <field>
+        <name>num_banco</name>
+      </field>
+      <field>
+        <name>tipo_punto_cliente</name>
+      </field>
+      <field>
+        <name>tipo_punto_centro</name>
+      </field>
+      <field>
+        <name>ind_activo</name>
+      </field>
+      <field>
+        <name>fecha_canc</name>
+      </field>
+      <field>
+        <name>ESTATUS_REGISTRO</name>
+      </field>
+      <field>
+        <name>COD_MUNICIPIO</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1106,8 +1717,38 @@ ORDER BY COD_COMPANIA
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>64</yloc>
+      <xloc>592</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>50000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>localhost</server>
+    <server>10.66.4.189</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>fuzcategui</username>
+    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>repositorio</database>
+    <database>REPOMOVIL</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <username>repomovil2</username>
+    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -591,12 +591,12 @@
     <step1>Leer RUTA legado</step1>
     <step2>Leer OFICINA repositorio</step2>
     <keys_1>
-      <key>cod_ofic</key>
       <key>cod_cia</key>
+      <key>cod_ofic</key>
     </keys_1>
     <keys_2>
-      <key>COD_OFICINA</key>
       <key>COD_COMPANIA</key>
+      <key>COD_OFICINA</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -664,7 +664,7 @@
       <value>
         <name>FEC_MODIFICACION</name>
         <rename>FEC_MODIFICACION</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>USUARIO_CREACION</name>
@@ -718,7 +718,7 @@
 FROM dbo.OFICINA o
 LEFT JOIN dbo.COMPANIA c
 ON c.ID_COMPANIA = o.FK_COMPANIA
-ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
+ORDER BY c.COD_COMPANIA, o.COD_OFICINA </sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -745,7 +745,7 @@ ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -768,7 +768,7 @@ ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -791,7 +791,7 @@ ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -814,7 +814,7 @@ ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -837,7 +837,7 @@ ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -860,7 +860,7 @@ ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -874,8 +874,8 @@ ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
-      <yloc>208</yloc>
+      <xloc>112</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -902,7 +902,7 @@ ORDER BY o.COD_OFICINA, c.COD_COMPANIA </sql>
 , CURRENT_TIMESTAMP as FEC_MODIFICACION 
 , 1 as ESTATUS_REGISTRO
 FROM "dbo"."ruta"
-ORDER BY cod_ofic
+ORDER BY cod_cia, cod_ofic
 </sql>
     <limit/>
     <lookup/>
