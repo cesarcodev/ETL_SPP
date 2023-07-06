@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>10.66.4.189</server>
+    <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>fuzcategui</username>
-    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
+    <username>sa</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>REPOMOVIL</database>
+    <database>repositorio</database>
     <port>1433</port>
-    <username>repomovil2</username>
-    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
+    <username>sa</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -586,11 +586,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Buscar ID LR para PUNTO_LR</from>
-      <to>Validar datos</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Buscar ID PUNTO</from>
       <to>Ordenar por num_linea_lr, num_listarec, fecha_listarec, num_ruta_oper y num_ofic_serv</to>
       <enabled>Y</enabled>
@@ -598,6 +593,26 @@
     <hop>
       <from>Ordenar por num_linea_lr, num_listarec, fecha_listarec, num_ruta_oper y num_ofic_serv</from>
       <to>Buscar ID LR para PUNTO_LR</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Buscar ID LR para PUNTO_LR</from>
+      <to>Ordenar por num_cli</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Ordenar por num_cli</from>
+      <to>Buscar ID cliente</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Buscar ID cliente</from>
+      <to>Validar datos</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Leer CLIENTE repositorio </from>
+      <to>Buscar ID cliente</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -680,8 +695,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>256</yloc>
+      <xloc>672</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -803,6 +818,11 @@
         <rename>FK_PUNTO</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>FK_CLIENTE</name>
+        <rename>FK_CLIENTE</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -813,7 +833,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1072</xloc>
+      <xloc>1360</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -845,8 +865,8 @@ FROM re_lista_rec_d lrd
    AND lrd.num_ruta_oper  = lrr.num_ruta_oper
    AND lrd.fecha_listarec = lrr.fecha_listarec
    AND lrd.num_listarec   = lrr.num_listarec
---where lrr.fecha_listarec = '2022-10-06'
-where lrr.status_lr = 11 AND lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
+where lrr.fecha_listarec = '2023-07-03'
+--where lrr.status_lr = 11 AND lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
 --where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
 group by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_listarec, lrd.num_listarec
 order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_listarec, lrd.num_listarec</sql>
@@ -876,7 +896,7 @@ order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_lista
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -899,7 +919,30 @@ order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_lista
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>num_cia_serv</name>
+        <length>2</length>
+        <precision>-1</precision>
+        <origin>Leer LR legado</origin>
+        <comments>num_cia_serv</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -922,7 +965,7 @@ order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_lista
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -945,7 +988,7 @@ order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_lista
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1195,6 +1238,7 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
 	  ,lrd.num_ruta_oper
 	  ,lrd.num_punto
 	  ,lrd.observacion
+	  ,lrd.num_cli
 	  ,CAST(lrd.fecha_listarec as DATETIME) as fecha_listarec
 	  ,TRIM(punto.nombre_punto) nombre_punto
 	  , 'Sistema' as USUARIO_CREACION
@@ -1212,8 +1256,8 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
    AND lrd.num_listarec   = lrr.num_listarec
   LEFT JOIN punto punto
     ON lrd.num_punto = punto.num_pto
---where lrr.fecha_listarec = '2022-10-06'
-where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 11
+where lrr.fecha_listarec = '2023-07-03'
+--where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 11
 --where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
 
  ORDER BY lrd.num_punto</sql>
@@ -1243,7 +1287,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1266,7 +1310,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1289,7 +1333,30 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>num_cia_serv</name>
+        <length>2</length>
+        <precision>-1</precision>
+        <origin>Leer PUNTO legado</origin>
+        <comments>num_cia_serv</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1312,7 +1379,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1335,7 +1402,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1358,7 +1425,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1381,7 +1448,30 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_cli</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Leer PUNTO legado</origin>
+        <comments>num_cli</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1404,7 +1494,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1427,7 +1517,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1450,7 +1540,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1473,7 +1563,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1496,7 +1586,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1519,7 +1609,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1542,7 +1632,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1565,7 +1655,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1794,45 +1884,59 @@ ORDER BY COD_PUNTO
       </field>
       <field>
         <name>FEC_LISTA</name>
+        <rename/>
       </field>
       <field>
         <name>num_listarec</name>
+        <rename/>
       </field>
       <field>
         <name>num_punto</name>
+        <rename/>
       </field>
       <field>
         <name>fecha_listarec</name>
+        <rename/>
       </field>
       <field>
         <name>nombre_punto</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>COD_PUNTO</name>
+        <rename/>
       </field>
       <field>
         <name>NRO_LISTA</name>
+        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
+        <rename/>
       </field>
       <field>
         <name>FK_ESTATUS</name>
+        <rename/>
       </field>
       <field>
         <name>ESTATUS_PUNTO</name>
+        <rename/>
       </field>
       <field>
         <name>posicion_visible</name>
@@ -1841,6 +1945,10 @@ ORDER BY COD_PUNTO
       <field>
         <name>observacion</name>
         <rename>OBSERVACIONES</rename>
+      </field>
+      <field>
+        <name>ID_CLIENTE</name>
+        <rename>FK_CLIENTE</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1853,8 +1961,193 @@ ORDER BY COD_PUNTO
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
-      <yloc>48</yloc>
+      <xloc>1104</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Leer CLIENTE repositorio </name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Repositorio Movil</connection>
+    <sql>SELECT 
+	ID_CLIENTE
+    ,COD_CLIENTE
+    ,RAZON_SOCIAL
+FROM dbo.CLIENTE
+ORDER BY COD_CLIENTE</sql>
+    <limit/>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>ID_CLIENTE</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer CLIENTErepositorio </origin>
+        <comments>ID_CLIENTE</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>COD_CLIENTE</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer CLIENTErepositorio </origin>
+        <comments>COD_CLIENTE</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>RAZON_SOCIAL</name>
+        <length>100</length>
+        <precision>-1</precision>
+        <origin>Leer CLIENTErepositorio </origin>
+        <comments>RAZON_SOCIAL</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Buscar ID cliente</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>Ordenar por num_cli</step1>
+    <step2>Leer CLIENTE repositorio </step2>
+    <keys_1>
+      <key>num_cli</key>
+    </keys_1>
+    <keys_2>
+      <key>COD_CLIENTE</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Ordenar por num_cli</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>num_cli</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>10.66.4.189</server>
+    <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>fuzcategui</username>
-    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
+    <username>sa</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>REPOMOVIL</database>
+    <database>repositorio</database>
     <port>1433</port>
-    <username>repomovil2</username>
-    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
+    <username>sa</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -998,8 +998,8 @@ ORDER BY COD_COMPANIA, COD_OFICINA, COD_RUTA
 , 19 as FK_ESTATUS
   FROM re_lista_rec_r
 --where fecha_listarec = '2022-10-06'
---where fecha_listarec = '2022-09-30'
-where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
+where fecha_listarec = '2023-07-03'
+--where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
 
 ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
     <limit/>
@@ -1761,7 +1761,6 @@ ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
       </field>
       <field>
         <name>num_unidad</name>
-        <rename/>
       </field>
       <field>
         <name>nro_llaveros</name>
@@ -1777,47 +1776,36 @@ ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
       </field>
       <field>
         <name>COD_RUTA</name>
-        <rename/>
       </field>
       <field>
         <name>USUARIO_CREACION</name>
-        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
-        <rename/>
       </field>
       <field>
         <name>FEC_CREACION</name>
-        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
-        <rename/>
       </field>
       <field>
         <name>COD_OFICINA</name>
-        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
-        <rename/>
       </field>
       <field>
         <name>FK_ESTATUS</name>
-        <rename/>
       </field>
       <field>
         <name>FK_LOG_TIPO</name>
-        <rename/>
       </field>
       <field>
         <name>DESCRIPCION</name>
-        <rename/>
       </field>
       <field>
         <name>ID_REGISTRO</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
