@@ -496,7 +496,7 @@
   </connection>
   <order>
     <hop>
-      <from>Leer La ultima fecha de modificación en REPOSITORIO</from>
+      <from>Leer La ultima fecha de transaccion en REPOSITORIO</from>
       <to>Asignar valor a variables</to>
       <enabled>Y</enabled>
     </hop>
@@ -536,7 +536,7 @@
     </GUI>
   </step>
   <step>
-    <name>Leer La ultima fecha de modificación en REPOSITORIO</name>
+    <name>Leer La ultima fecha de transaccion en REPOSITORIO</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -548,8 +548,7 @@
     </partitioning>
     <connection>Repositorio Movil</connection>
     <sql>SELECT TOP(1)
-  CONVERT(DATE, MAX(FEC_MODIFICACION)) as FECHA
---NULL as FECHA
+  CONVERT(DATE, MAX(FECHA_TRANSACCION)) as FECHA
 FROM PUNTO</sql>
     <limit>0</limit>
     <lookup/>
@@ -559,14 +558,14 @@ FROM PUNTO</sql>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
         <name>FECHA</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer La ultima fecha de modificación en REPOSITORIO</origin>
+        <length>10</length>
+        <precision>-1</precision>
+        <origin>Leer La ultima fecha de transaccion en REPOSITORIO</origin>
         <comments>FECHA</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
