@@ -1687,10 +1687,6 @@ ORDER BY COD_ESTATUS
         <rename>STATUS_NUEVO</rename>
       </field>
       <field>
-        <name>status</name>
-        <rename>STATUS</rename>
-      </field>
-      <field>
         <name>origen</name>
         <rename>ORIGEN</rename>
       </field>
@@ -1699,70 +1695,24 @@ ORDER BY COD_ESTATUS
         <rename>FECHA_COMP</rename>
       </field>
       <field>
-        <name>id_cs</name>
-        <rename>ID_CS</rename>
-      </field>
-      <field>
-        <name>tipo_mov</name>
-        <rename>TIPO_MOV</rename>
-      </field>
-      <field>
-        <name>tipo_denom</name>
-        <rename>TIPO_DENOM</rename>
-      </field>
-      <field>
-        <name>cod_cia</name>
-        <rename>COD_CIA</rename>
-      </field>
-      <field>
-        <name>cod_ofi</name>
-        <rename>COD_OFI</rename>
-      </field>
-      <field>
-        <name>fecha_oper</name>
-        <rename>FECHA_OPER</rename>
-      </field>
-      <field>
-        <name>num_s47</name>
-        <rename>NUM_S47</rename>
-      </field>
-      <field>
-        <name>num_ord_viej</name>
-        <rename>NUM_ORD_VIEJ</rename>
-      </field>
-      <field>
-        <name>num_cta</name>
-        <rename>NUM_CTA</rename>
-      </field>
-      <field>
-        <name>fecha_autor</name>
-        <rename>FECHA_AUTOR</rename>
-      </field>
-      <field>
-        <name>num_autoriz</name>
-        <rename>NUM_AUTORIZ</rename>
-      </field>
-      <field>
-        <name>cod_agencia</name>
-        <rename>COD_AGENCIA</rename>
-      </field>
-      <field>
-        <name>comp_digital</name>
-      </field>
-      <field>
         <name>USUARIO_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
+        <rename/>
       </field>
       <field>
         <name>ID_ESTATUS_MAESTROS</name>

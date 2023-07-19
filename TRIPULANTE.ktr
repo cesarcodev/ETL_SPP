@@ -1071,7 +1071,7 @@ ORDER BY NUM_EMPLEADO</sql>
   ('6', lr.sexto_hombre)
 ) c (ROL, empleado)
 
- --WHERE lr.fecha_listarec = '03-06-2023'
+ --WHERE lr.fecha_listarec = '2023-07-06'
 WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11 
  ORDER BY lr.num_listarec, lr.fecha_listarec, lr.num_cia_serv, lr.num_ofic_serv, lr.num_ruta_oper,rol;</sql>
     <limit/>
@@ -1438,12 +1438,6 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <rename>FK_ROL</rename>
       </field>
       <field>
-        <name>num_listarec</name>
-      </field>
-      <field>
-        <name>nro_trab</name>
-      </field>
-      <field>
         <name>USUARIO_CREACION</name>
       </field>
       <field>
@@ -1461,12 +1455,6 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
       <field>
         <name>fecha_listarec</name>
         <rename>FEC_LISTA</rename>
-      </field>
-      <field>
-        <name>num_ofic_serv</name>
-      </field>
-      <field>
-        <name>num_ruta_oper</name>
       </field>
       <field>
         <name>ID_LISTA_RECORRIDO</name>

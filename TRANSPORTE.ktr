@@ -661,7 +661,7 @@
 , 1 as FK_TIPO_TRANSPORTE
 FROM "dbo"."re_lista_rec_r"
 where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND TRIM(num_unidad) not like ''
---where fecha_listarec = '2022-10-06' AND TRIM(num_unidad) not like ''</sql>
+--where fecha_listarec = '2023-07-06' AND TRIM(num_unidad) not like ''</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>

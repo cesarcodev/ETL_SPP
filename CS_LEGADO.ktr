@@ -1122,8 +1122,8 @@ ORDER BY COD_ESTATUS
 , CURRENT_TIMESTAMP as FEC_MODIFICACION 
 , 1 as ESTATUS_REGISTRO
 FROM "dbo"."tracking_comp_legado"
---WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE, '${FECHA}')
-WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE, '2022-11-25')
+WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE, '${FECHA}')
+--WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE, '2022-11-25')
 ORDER BY status_nuevo
 </sql>
     <limit/>
@@ -1137,7 +1137,7 @@ ORDER BY status_nuevo
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>FECHA</name>
-        <length>10</length>
+        <length>8</length>
         <precision>-1</precision>
         <origin>Obtener variables</origin>
         <comments/>

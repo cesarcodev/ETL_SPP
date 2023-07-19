@@ -475,7 +475,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Leer La ultima fecha transaccion REPOSITORIO</name>
+      <name>Leer La ultima fecha modificacion REPOSITORIO</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -592,7 +592,7 @@
   <hops>
     <hop>
       <from>Validador de Conexión BD</from>
-      <to>Leer La ultima fecha transaccion REPOSITORIO</to>
+      <to>Leer La ultima fecha modificacion REPOSITORIO</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -618,7 +618,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Leer La ultima fecha transaccion REPOSITORIO</from>
+      <from>Leer La ultima fecha modificacion REPOSITORIO</from>
       <to>CS_LEGADO</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
