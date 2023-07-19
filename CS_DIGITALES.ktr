@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>TRANSPORTE</name>
+    <name>CS_DIGITALES</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/03/08 11:33:18.494</created_date>
+    <created_date>2023/07/19 13:05:31.382</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/03/08 11:33:18.494</modified_date>
+    <modified_date>2023/07/19 13:05:31.382</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -556,18 +555,83 @@
   </connection>
   <order>
     <hop>
-      <from>Leer TRANSPORTE legado</from>
+      <from>Obtener variables</from>
+      <to>Write to log</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Write to log</from>
+      <to>Filtrar filas</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filtrar filas</from>
+      <to>Leer cs digitales LEGADOS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Leer cs digitales LEGADOS</from>
       <to>Validar datos</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Validar datos</from>
-      <to>Guardar datos en TRANSPORTE repositorio</to>
+      <to>Guardar cs digitales</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filtrar filas</from>
+      <to>Write to log 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Write to log 2</from>
+      <to>Leer todo cs digitales LEGADOS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Leer todo cs digitales LEGADOS</from>
+      <to>Validar datos</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Guardar datos en TRANSPORTE repositorio</name>
+    <name>Filtrar filas</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>Leer cs digitales LEGADOS</send_true_to>
+    <send_false_to>Write to log 2</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>FECHA_REGISTRO_DIGITALES</leftvalue>
+        <function>IS NOT NULL</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Guardar cs digitales</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -582,46 +646,60 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>dbo</schema>
-      <table>transporte</table>
+      <table>CS_DIGITALES</table>
       <key>
-        <name>COD_UNIDAD</name>
-        <field>COD_UNIDAD</field>
+        <name>NUM_CLI</name>
+        <field>NUM_CLI</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>COMPROBANTE</name>
+        <field>COMPROBANTE</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>NUM_CORREL</name>
+        <field>NUM_CORREL</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ORIGEN</name>
+        <field>ORIGEN_COMP</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>FECHA_REGISTRO</name>
+        <field>FECHA_REGISTRO</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>COD_UNIDAD</name>
-        <rename>COD_UNIDAD</rename>
+        <name>NUM_CLI</name>
+        <rename>NUM_CLI</rename>
         <update>N</update>
       </value>
       <value>
-        <name>USUARIO_CREACION</name>
-        <rename>USUARIO_CREACION</rename>
+        <name>COMPROBANTE</name>
+        <rename>COMPROBANTE</rename>
         <update>N</update>
       </value>
       <value>
-        <name>USUARIO_MODIFICACION</name>
-        <rename>USUARIO_MODIFICACION</rename>
+        <name>NUM_CORREL</name>
+        <rename>NUM_CORREL</rename>
         <update>N</update>
       </value>
       <value>
-        <name>FEC_CREACION</name>
-        <rename>FEC_CREACION</rename>
+        <name>ORIGEN_COMP</name>
+        <rename>ORIGEN</rename>
         <update>N</update>
       </value>
       <value>
-        <name>FEC_MODIFICACION</name>
-        <rename>FEC_MODIFICACION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>ESTATUS_REGISTRO</name>
-        <rename>ESTATUS_REGISTRO</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>FK_TIPO_TRANSPORTE</name>
-        <rename>FK_TIPO_TRANSPORTE</rename>
+        <name>FECHA_REGISTRO</name>
+        <rename>FECHA_REGISTRO</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -634,13 +712,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>16</yloc>
+      <xloc>1024</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Leer TRANSPORTE legado</name>
+    <name>Leer cs digitales LEGADOS</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -651,33 +729,54 @@
       <schema_name/>
     </partitioning>
     <connection>DEMO</connection>
-    <sql>SELECT
- "num_unidad"
-, 'Sistema' as USUARIO_CREACION
-, 'Sistema' as USUARIO_MODIFICACION
-, CURRENT_TIMESTAMP as FEC_CREACION 
-, CURRENT_TIMESTAMP as FEC_MODIFICACION 
-, 1 as ESTATUS_REGISTRO
-, 1 as FK_TIPO_TRANSPORTE
-FROM "dbo"."re_lista_rec_r"
---where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND TRIM(num_unidad) not like ''
-where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
-    <limit/>
+    <sql>SELECT 
+	   num_cli
+      ,comprobante
+      ,num_correl
+      ,origen_comp
+      ,fecha_registro
+FROM cs_digitales
+WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE,'${FECHA_REGISTRO_DIGITALES}')
+--WHERE CONVERT(DATE, fecha_registro) >= '2023-07-01'</sql>
+    <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>num_unidad</name>
+        <name>FECHA_REGISTRO_DIGITALES</name>
+        <length>27</length>
+        <precision>-1</precision>
+        <origin>Obtener variables</origin>
+        <comments/>
+        <conversion_Mask/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_cli</name>
         <length>4</length>
-        <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>num_unidad</comments>
-        <conversion_Mask/>
+        <precision>0</precision>
+        <origin>Leer cs digitales LEGADOS</origin>
+        <comments>num_cli</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -695,80 +794,11 @@ where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>USUARIO_CREACION</name>
-        <length>7</length>
+        <name>comprobante</name>
+        <length>10</length>
         <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>USUARIO_CREACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>USUARIO_MODIFICACION</name>
-        <length>7</length>
-        <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>USUARIO_MODIFICACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>FEC_CREACION</name>
-        <length>3</length>
-        <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>FEC_CREACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>FEC_MODIFICACION</name>
-        <length>3</length>
-        <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>FEC_MODIFICACION</comments>
+        <origin>Leer cs digitales LEGADOS</origin>
+        <comments>comprobante</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -787,11 +817,11 @@ where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>ESTATUS_REGISTRO</name>
-        <length>9</length>
+        <name>num_correl</name>
+        <length>4</length>
         <precision>0</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>ESTATUS_REGISTRO</comments>
+        <origin>Leer cs digitales LEGADOS</origin>
+        <comments>num_correl</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -808,14 +838,37 @@ where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>FK_TIPO_TRANSPORTE</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>FK_TIPO_TRANSPORTE</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <name>origen_comp</name>
+        <length>6</length>
+        <precision>-1</precision>
+        <origin>Leer cs digitales LEGADOS</origin>
+        <comments>origen_comp</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fecha_registro</name>
+        <length>3</length>
+        <precision>-1</precision>
+        <origin>Leer cs digitales LEGADOS</origin>
+        <comments>fecha_registro</comments>
+        <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -840,8 +893,86 @@ where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>16</yloc>
+      <xloc>624</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Leer todo cs digitales LEGADOS</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DEMO</connection>
+    <sql>SELECT num_cli
+      ,comprobante
+      ,num_correl
+      ,origen_comp
+      ,fecha_registro
+ FROM cs_digitales</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>704</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Obtener variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>FECHA_REGISTRO_DIGITALES</name>
+        <variable>${FECHA_REGISTRO_DIGITALES}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -858,26 +989,24 @@ where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
     </partitioning>
     <fields>
       <field>
-        <name>num_unidad</name>
-        <rename>COD_UNIDAD</rename>
+        <name>num_cli</name>
+        <rename>NUM_CLI</rename>
       </field>
       <field>
-        <name>USUARIO_CREACION</name>
+        <name>comprobante</name>
+        <rename>COMPROBANTE</rename>
       </field>
       <field>
-        <name>USUARIO_MODIFICACION</name>
+        <name>num_correl</name>
+        <rename>NUM_CORREL</rename>
       </field>
       <field>
-        <name>FEC_CREACION</name>
+        <name>origen_comp</name>
+        <rename>ORIGEN</rename>
       </field>
       <field>
-        <name>FEC_MODIFICACION</name>
-      </field>
-      <field>
-        <name>ESTATUS_REGISTRO</name>
-      </field>
-      <field>
-        <name>FK_TIPO_TRANSPORTE</name>
+        <name>fecha_registro</name>
+        <rename>FECHA_REGISTRO</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -890,8 +1019,75 @@ where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
       </output>
     </remotesteps>
     <GUI>
+      <xloc>848</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage/>
+    <fields>
+      <field>
+        <name>FECHA_REGISTRO_DIGITALES</name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
       <xloc>304</xloc>
-      <yloc>16</yloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Write to log 2</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>BUSCANDO TODO CS DIGITALES</logmessage>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

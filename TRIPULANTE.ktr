@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>10.66.4.189</server>
+    <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>fuzcategui</username>
-    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
+    <username>sa</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>REPOMOVIL</database>
+    <database>repositorio</database>
     <port>1433</port>
-    <username>repomovil2</username>
-    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
+    <username>sa</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -1071,8 +1071,8 @@ ORDER BY NUM_EMPLEADO</sql>
   ('6', lr.sexto_hombre)
 ) c (ROL, empleado)
 
- --WHERE lr.fecha_listarec = '2023-07-06'
-WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11 
+ WHERE lr.fecha_listarec >= '2023-06-27'
+--WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11 
  ORDER BY lr.num_listarec, lr.fecha_listarec, lr.num_cia_serv, lr.num_ofic_serv, lr.num_ruta_oper,rol;</sql>
     <limit/>
     <lookup/>
@@ -1100,7 +1100,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1123,7 +1123,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1146,7 +1146,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1169,7 +1169,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1192,7 +1192,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1215,7 +1215,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1238,7 +1238,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1261,7 +1261,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1284,7 +1284,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1307,7 +1307,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1330,7 +1330,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1353,7 +1353,7 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>

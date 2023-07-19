@@ -438,13 +438,13 @@
   </notepads>
   <connection>
     <name>DEMO</name>
-    <server>10.66.4.189</server>
+    <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
     <database>movil24</database>
     <port>1433</port>
-    <username>fuzcategui</username>
-    <password>Encrypted 2be98afc86aa7b3d6f90ded258c8badd1</password>
+    <username>sa</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -500,10 +500,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>REPOMOVIL</database>
+    <database>repositorio</database>
     <port>1433</port>
-    <username>repomovil2</username>
-    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
+    <username>sa</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -1008,8 +1008,8 @@ FROM re_lista_rec_d lrd
    AND lrd.num_ruta_oper  = lrr.num_ruta_oper
    AND lrd.fecha_listarec = lrr.fecha_listarec
    AND lrd.num_listarec   = lrr.num_listarec
---where lrr.fecha_listarec = '2023-07-06'
-where lrr.status_lr = 11 AND lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
+where lrr.fecha_listarec >= '2023-06-27'
+--where lrr.status_lr = 11 AND lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
 group by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_listarec, lrd.num_listarec
 order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_listarec, lrd.num_listarec</sql>
     <limit/>
@@ -1038,7 +1038,7 @@ order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_lista
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1061,7 +1061,7 @@ order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_lista
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1084,7 +1084,7 @@ order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_lista
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1107,7 +1107,7 @@ order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_lista
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1130,7 +1130,7 @@ order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_lista
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1398,8 +1398,8 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
    AND lrd.num_listarec   = lrr.num_listarec
   LEFT JOIN punto punto
     ON lrd.num_punto = punto.num_pto
---where lrr.fecha_listarec = '2023-07-06'
-where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 11
+where lrr.fecha_listarec >= '2023-06-27'
+--where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 11
 
  ORDER BY lrd.num_punto</sql>
     <limit/>
@@ -1428,7 +1428,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1451,7 +1451,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1474,7 +1474,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1497,7 +1497,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1520,7 +1520,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1543,7 +1543,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1566,7 +1566,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1589,7 +1589,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1612,7 +1612,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1635,7 +1635,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1658,7 +1658,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1681,7 +1681,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1704,7 +1704,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1727,7 +1727,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1750,7 +1750,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1773,7 +1773,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1796,7 +1796,7 @@ where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>TRANSPORTE</name>
+    <name>FECHA_REGISTRO_CS_DIGITALES</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -428,73 +428,14 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/03/08 11:33:18.494</created_date>
+    <created_date>2023/07/19 12:55:47.732</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/03/08 11:33:18.494</modified_date>
+    <modified_date>2023/07/19 12:55:47.732</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
-  <connection>
-    <name>DEMO</name>
-    <server>localhost</server>
-    <type>MSSQL</type>
-    <access>Native</access>
-    <database>movil24</database>
-    <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>EXTRA_OPTION_MSSQL.instance</code>
-        <attribute>MSSQLSERVER</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>1433</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
   <connection>
     <name>Repositorio Movil</name>
     <server>localhost</server>
@@ -556,19 +497,14 @@
   </connection>
   <order>
     <hop>
-      <from>Leer TRANSPORTE legado</from>
-      <to>Validar datos</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Validar datos</from>
-      <to>Guardar datos en TRANSPORTE repositorio</to>
+      <from>Leer la ultima fecha regsitro REPOSITORIO</from>
+      <to>Asignar valor a variables</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Guardar datos en TRANSPORTE repositorio</name>
-    <type>InsertUpdate</type>
+    <name>Asignar valor a variables</name>
+    <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -577,54 +513,15 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Repositorio Movil</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>dbo</schema>
-      <table>transporte</table>
-      <key>
-        <name>COD_UNIDAD</name>
-        <field>COD_UNIDAD</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>COD_UNIDAD</name>
-        <rename>COD_UNIDAD</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>USUARIO_CREACION</name>
-        <rename>USUARIO_CREACION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>USUARIO_MODIFICACION</name>
-        <rename>USUARIO_MODIFICACION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>FEC_CREACION</name>
-        <rename>FEC_CREACION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>FEC_MODIFICACION</name>
-        <rename>FEC_MODIFICACION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>ESTATUS_REGISTRO</name>
-        <rename>ESTATUS_REGISTRO</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>FK_TIPO_TRANSPORTE</name>
-        <rename>FK_TIPO_TRANSPORTE</rename>
-        <update>N</update>
-      </value>
-    </lookup>
+    <fields>
+      <field>
+        <field_name>FECHA_REGISTRO_DIGITALES</field_name>
+        <variable_name>FECHA_REGISTRO_DIGITALES</variable_name>
+        <variable_type>ROOT_JOB</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -634,13 +531,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>16</yloc>
+      <xloc>384</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Leer TRANSPORTE legado</name>
+    <name>Leer la ultima fecha regsitro REPOSITORIO</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -650,19 +547,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>DEMO</connection>
-    <sql>SELECT
- "num_unidad"
-, 'Sistema' as USUARIO_CREACION
-, 'Sistema' as USUARIO_MODIFICACION
-, CURRENT_TIMESTAMP as FEC_CREACION 
-, CURRENT_TIMESTAMP as FEC_MODIFICACION 
-, 1 as ESTATUS_REGISTRO
-, 1 as FK_TIPO_TRANSPORTE
-FROM "dbo"."re_lista_rec_r"
---where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND TRIM(num_unidad) not like ''
-where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
-    <limit/>
+    <connection>Repositorio Movil</connection>
+    <sql>SELECT 
+CONVERT(DATE,  MAX(FECHA_REGISTRO)) AS FECHA_REGISTRO_DIGITALES
+FROM CS_DIGITALES</sql>
+    <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
@@ -672,150 +561,12 @@ where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>num_unidad</name>
-        <length>4</length>
+        <name>FECHA_REGISTRO_DIGITALES</name>
+        <length>10</length>
         <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>num_unidad</comments>
+        <origin>Leer la ultima fecha regsitro REPOSITORIO</origin>
+        <comments>FECHA_REGISTRO_DIGITALES</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>USUARIO_CREACION</name>
-        <length>7</length>
-        <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>USUARIO_CREACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>USUARIO_MODIFICACION</name>
-        <length>7</length>
-        <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>USUARIO_MODIFICACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>FEC_CREACION</name>
-        <length>3</length>
-        <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>FEC_CREACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>FEC_MODIFICACION</name>
-        <length>3</length>
-        <precision>-1</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>FEC_MODIFICACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>ESTATUS_REGISTRO</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>ESTATUS_REGISTRO</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>FK_TIPO_TRANSPORTE</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer TRANSPORTE legado</origin>
-        <comments>FK_TIPO_TRANSPORTE</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
@@ -840,58 +591,8 @@ where fecha_listarec >= '2023-06-27' AND TRIM(num_unidad) not like ''</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>16</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Validar datos</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>num_unidad</name>
-        <rename>COD_UNIDAD</rename>
-      </field>
-      <field>
-        <name>USUARIO_CREACION</name>
-      </field>
-      <field>
-        <name>USUARIO_MODIFICACION</name>
-      </field>
-      <field>
-        <name>FEC_CREACION</name>
-      </field>
-      <field>
-        <name>FEC_MODIFICACION</name>
-      </field>
-      <field>
-        <name>ESTATUS_REGISTRO</name>
-      </field>
-      <field>
-        <name>FK_TIPO_TRANSPORTE</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>304</xloc>
-      <yloc>16</yloc>
+      <xloc>144</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

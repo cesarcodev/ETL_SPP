@@ -799,9 +799,9 @@
 	AND lr.num_listarec = csle.num_listarec_ent 
 	AND lr.num_cia_serv = csle.cia_serv_ent
 	
-WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lr.status_lr=11
+--WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lr.status_lr=11
 --WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
- --WHERE lr.fecha_listarec = '2023-01-06'
+ WHERE lr.fecha_listarec >= '2023-06-27'
 order by  num_cli, csle.nro_comp, csle.num_correl</sql>
     <limit/>
     <lookup/>
@@ -829,7 +829,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -852,7 +852,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -875,7 +875,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -898,7 +898,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -921,7 +921,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -944,7 +944,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -967,7 +967,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -990,7 +990,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1013,7 +1013,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1036,7 +1036,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1059,7 +1059,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1082,7 +1082,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1105,7 +1105,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1128,7 +1128,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1151,7 +1151,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1174,7 +1174,7 @@ order by  num_cli, csle.nro_comp, csle.num_correl</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1647,39 +1647,30 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, l
       </field>
       <field>
         <name>USUARIO_CREACION</name>
-        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
-        <rename/>
       </field>
       <field>
         <name>FEC_CREACION</name>
-        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
-        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
-        <rename/>
       </field>
       <field>
         <name>NUM_LINEA</name>
-        <rename/>
       </field>
       <field>
         <name>NRO_LISTA</name>
-        <rename/>
       </field>
       <field>
         <name>FK_ESTATUS</name>
-        <rename/>
       </field>
       <field>
         <name>FK_TIPO_OPERACION</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
