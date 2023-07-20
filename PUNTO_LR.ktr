@@ -1008,8 +1008,8 @@ FROM re_lista_rec_d lrd
    AND lrd.num_ruta_oper  = lrr.num_ruta_oper
    AND lrd.fecha_listarec = lrr.fecha_listarec
    AND lrd.num_listarec   = lrr.num_listarec
-where lrr.fecha_listarec >= '2023-06-27'
---where lrr.status_lr = 11 AND lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
+--where lrr.fecha_listarec >= '2023-06-27'
+where lrr.status_lr = 11 AND lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
 group by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_listarec, lrd.num_listarec
 order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_listarec, lrd.num_listarec</sql>
     <limit/>
@@ -1203,7 +1203,7 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1226,7 +1226,7 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1249,7 +1249,7 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1272,7 +1272,7 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1295,7 +1295,7 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1318,7 +1318,7 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1341,7 +1341,7 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1398,8 +1398,8 @@ ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, N
    AND lrd.num_listarec   = lrr.num_listarec
   LEFT JOIN punto punto
     ON lrd.num_punto = punto.num_pto
-where lrr.fecha_listarec >= '2023-06-27'
---where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 11
+--where lrr.fecha_listarec >= '2023-06-27'
+where lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) AND lrr.status_lr = 11
 
  ORDER BY lrd.num_punto</sql>
     <limit/>

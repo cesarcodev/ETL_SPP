@@ -974,6 +974,11 @@
         <rename>PUNTO_EJECUCION</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>FECHA_REGISTRO</name>
+        <rename>FECHA_REGISTRO</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -1116,6 +1121,7 @@ ORDER BY COD_ESTATUS
 , "cod_agencia"
 , "comp_digital"
 , "punto_ejecucion"
+, "fecha_registro"
 , 'Sistema' as USUARIO_CREACION
 , 'Sistema' as USUARIO_MODIFICACION
 , CURRENT_TIMESTAMP as FEC_CREACION 
@@ -1801,6 +1807,29 @@ ORDER BY status_nuevo
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fecha_registro</name>
+        <length>3</length>
+        <precision>-1</precision>
+        <origin>Leer tracking_comp_legado legado</origin>
+        <comments>fecha_registro</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>USUARIO_CREACION</name>
@@ -2091,18 +2120,23 @@ ORDER BY status_nuevo
       </field>
       <field>
         <name>USUARIO_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>USUARIO_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_CREACION</name>
+        <rename/>
       </field>
       <field>
         <name>FEC_MODIFICACION</name>
+        <rename/>
       </field>
       <field>
         <name>ESTATUS_REGISTRO</name>
+        <rename/>
       </field>
       <field>
         <name>ID_ESTATUS_MAESTROS</name>
@@ -2111,6 +2145,10 @@ ORDER BY status_nuevo
       <field>
         <name>punto_ejecucion</name>
         <rename>PUNTO_EJECUCION</rename>
+      </field>
+      <field>
+        <name>fecha_registro</name>
+        <rename>FECHA_REGISTRO</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>

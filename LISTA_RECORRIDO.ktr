@@ -582,17 +582,27 @@
     </hop>
     <hop>
       <from>Filtro</from>
-      <to>Guardar datos en lista_recorrido</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filtro</from>
       <to>Log</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Leer RUTA repositorio</from>
       <to>Buscar fk_ruta</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filtro</from>
+      <to>Guardar datos en TRANSPORTE repositorio</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Guardar datos en TRANSPORTE repositorio</from>
+      <to>Block this step until steps finish 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Block this step until steps finish 2</from>
+      <to>Guardar datos en lista_recorrido</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -624,6 +634,37 @@
     <GUI>
       <xloc>1248</xloc>
       <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Block this step until steps finish 2</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <steps>
+      <step>
+        <name>Guardar datos en TRANSPORTE repositorio</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -676,7 +717,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Guardar datos en lista_recorrido</send_true_to>
+    <send_true_to>Guardar datos en TRANSPORTE repositorio</send_true_to>
     <send_false_to>Log</send_false_to>
     <compare>
       <condition>
@@ -704,8 +745,81 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>208</yloc>
+      <xloc>656</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Guardar datos en TRANSPORTE repositorio</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Repositorio Movil</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>dbo</schema>
+      <table>transporte</table>
+      <key>
+        <name>COD_UNIDAD</name>
+        <field>COD_UNIDAD</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>COD_UNIDAD</name>
+        <rename>COD_UNIDAD</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>USUARIO_CREACION</name>
+        <rename>USUARIO_CREACION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>USUARIO_MODIFICACION</name>
+        <rename>USUARIO_MODIFICACION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>FEC_CREACION</name>
+        <rename>FEC_CREACION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>FEC_MODIFICACION</name>
+        <rename>FEC_MODIFICACION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>ESTATUS_REGISTRO</name>
+        <rename>ESTATUS_REGISTRO</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>FK_TIPO_TRANSPORTE</name>
+        <rename>FK_TIPO_TRANSPORTE</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -996,9 +1110,10 @@ ORDER BY COD_COMPANIA, COD_OFICINA, COD_RUTA
 , 1 as FK_LOG_TIPO
 , 0 as ID_REGISTRO
 , 19 as FK_ESTATUS
+, 1 as FK_TIPO_TRANSPORTE
   FROM re_lista_rec_r
-where fecha_listarec >= '2023-06-27'
---where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
+--where fecha_listarec >= '2023-06-27'
+where status_lr = 11 AND fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
 
 ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
     <limit/>
@@ -1606,6 +1721,29 @@ ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>FK_TIPO_TRANSPORTE</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer lista_recorrido legado</origin>
+        <comments>FK_TIPO_TRANSPORTE</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -1679,8 +1817,8 @@ ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
-      <yloc>304</yloc>
+      <xloc>864</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1708,7 +1846,7 @@ ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
     <read_field/>
     <arguments>
       <argument>
-        <name>num_unidad</name>
+        <name>COD_UNIDAD</name>
       </argument>
       <argument>
         <name>NRO_LISTA</name>
@@ -1760,6 +1898,7 @@ ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
       </field>
       <field>
         <name>num_unidad</name>
+        <rename>COD_UNIDAD</rename>
       </field>
       <field>
         <name>nro_llaveros</name>
@@ -1805,6 +1944,9 @@ ORDER BY num_cia_serv, num_ofic_serv, num_ruta_oper</sql>
       </field>
       <field>
         <name>ID_REGISTRO</name>
+      </field>
+      <field>
+        <name>FK_TIPO_TRANSPORTE</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>

@@ -871,7 +871,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1664</xloc>
+      <xloc>1744</xloc>
       <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
@@ -988,7 +988,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1760</xloc>
+      <xloc>1840</xloc>
       <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
@@ -1027,7 +1027,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1856</xloc>
+      <xloc>1936</xloc>
       <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
@@ -1453,7 +1453,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1664</xloc>
+      <xloc>1744</xloc>
       <yloc>176</yloc>
       <attributes_kjc/>
     </entry>
@@ -1471,7 +1471,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1760</xloc>
+      <xloc>1840</xloc>
       <yloc>144</yloc>
       <attributes_kjc/>
     </entry>
@@ -1489,7 +1489,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1872</xloc>
+      <xloc>1952</xloc>
       <yloc>176</yloc>
       <attributes_kjc/>
     </entry>
@@ -1704,7 +1704,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1856</xloc>
+      <xloc>1936</xloc>
       <yloc>352</yloc>
       <attributes_kjc/>
     </entry>
@@ -1743,6 +1743,45 @@
       <nr>0</nr>
       <xloc>720</xloc>
       <yloc>240</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>LISTA_RECORRIDO_STATUS</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/LISTA_RECORRIDO_ESTATUS.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <suppress_result_data>N</suppress_result_data>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1648</xloc>
+      <yloc>320</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -1840,15 +1879,6 @@
     <hop>
       <from>PERSONA</from>
       <to>LISTA_RECORRIDO</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>LISTA_RECORRIDO</from>
-      <to>TRIPULANTE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -2103,7 +2133,7 @@
       <to>TRANSPORTE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -2366,6 +2396,24 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>LISTA_RECORRIDO</from>
+      <to>LISTA_RECORRIDO_STATUS</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>LISTA_RECORRIDO_STATUS</from>
+      <to>TRIPULANTE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>

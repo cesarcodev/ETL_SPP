@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>TRIPULANTE</name>
+    <name>LISTA_RECORRIDO_ESTATUS</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/03/08 11:33:18.494</created_date>
+    <created_date>2023/07/19 21:00:06.511</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/03/08 11:33:18.494</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2023/07/19 21:00:06.511</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -556,77 +555,28 @@
   </connection>
   <order>
     <hop>
-      <from>Validar datos</from>
-      <to>Guardar datos en TRIPULANTE repositorio</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leer PERSONA repositorio</from>
-      <to>Buscar FK_PERSONA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Buscar FK_PERSONA</from>
-      <to>Validar datos</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leer empleado legado</from>
-      <to>Buscar ID LISTA_RECORRIDO</to>
+      <from>Leer LR legado</from>
+      <to>Buscar ID LR</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Leer LR repositorio</from>
-      <to>Buscar ID LISTA_RECORRIDO</to>
+      <to>Buscar ID LR</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Buscar ID LISTA_RECORRIDO</from>
-      <to>Ordenar por nro_trab</to>
+      <from>Buscar ID LR</from>
+      <to>Filtrar filas</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Ordenar por nro_trab</from>
-      <to>Buscar FK_PERSONA</to>
+      <from>Filtrar filas</from>
+      <to>Ejecutar script SQL</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Buscar FK_PERSONA</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>Ordenar por nro_trab</step1>
-    <step2>Leer PERSONA repositorio</step2>
-    <keys_1>
-      <key>nro_trab</key>
-    </keys_1>
-    <keys_2>
-      <key>NUM_EMPLEADO</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>16</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Buscar ID LISTA_RECORRIDO</name>
+    <name>Buscar ID LR</name>
     <type>MergeJoin</type>
     <description/>
     <distribute>Y</distribute>
@@ -637,21 +587,21 @@
       <schema_name/>
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>Leer empleado legado</step1>
+    <step1>Leer LR legado</step1>
     <step2>Leer LR repositorio</step2>
     <keys_1>
-      <key>num_listarec</key>
-      <key>fecha_listarec</key>
       <key>num_cia_serv</key>
       <key>num_ofic_serv</key>
       <key>num_ruta_oper</key>
+      <key>fecha_listarec</key>
+      <key>num_listarec</key>
     </keys_1>
     <keys_2>
-      <key>NRO_LISTA</key>
-      <key>FEC_LISTA</key>
       <key>COD_COMPANIA</key>
       <key>COD_OFICINA</key>
       <key>COD_RUTA</key>
+      <key>FEC_LISTA</key>
+      <key>NRO_LISTA</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -662,14 +612,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>64</yloc>
+      <xloc>352</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Guardar datos en TRIPULANTE repositorio</name>
-    <type>InsertUpdate</type>
+    <name>Leer LR legado</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -678,70 +628,173 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Repositorio Movil</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>dbo</schema>
-      <table>tripulante</table>
-      <key>
-        <name>FK_ROL</name>
-        <field>FK_ROL</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>FK_LISTA_RECORRIDO</name>
-        <field>FK_LISTA_RECORRIDO</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>NUM_EMPLEADO</name>
-        <rename>NUM_EMPLEADO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_ROL</name>
-        <rename>FK_ROL</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>FK_PERSONA</name>
-        <rename>FK_PERSONA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FEC_CREACION</name>
-        <rename>FEC_CREACION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>FEC_MODIFICACION</name>
-        <rename>FEC_MODIFICACION</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>USUARIO_CREACION</name>
-        <rename>USUARIO_CREACION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>USUARIO_MODIFICACION</name>
-        <rename>USUARIO_MODIFICACION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>ESTATUS_REGISTRO</name>
-        <rename>ESTATUS_REGISTRO</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>FK_LISTA_RECORRIDO</name>
-        <rename>FK_LISTA_RECORRIDO</rename>
-        <update>N</update>
-      </value>
-    </lookup>
+    <connection>DEMO</connection>
+    <sql>
+SELECT
+ CAST(lrd.fecha_listarec as DATETIME) as fecha_listarec
+, lrd.num_listarec
+,lrd.num_cia_serv
+,lrd.num_ofic_serv
+,lrd.num_ruta_oper
+ ,lrr.status_lr
+FROM re_lista_rec_d lrd
+    ----------------------detalle de la lista
+  JOIN re_lista_rec_r lrr
+  ON lrd.num_cia_serv   = lrr.num_cia_serv
+   AND lrd.num_ofic_serv  = lrr.num_ofic_serv
+   AND lrd.num_ruta_oper  = lrr.num_ruta_oper
+   AND lrd.fecha_listarec = lrr.fecha_listarec
+   AND lrd.num_listarec   = lrr.num_listarec
+--where lrr.fecha_listarec = '2023-06-27'
+where  lrr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP)
+group by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_listarec, lrd.num_listarec,lrr.status_lr
+order by lrd.num_cia_serv, lrd.num_ofic_serv, lrd.num_ruta_oper, lrd.fecha_listarec, lrd.num_listarec,lrr.status_lr</sql>
+    <limit/>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>fecha_listarec</name>
+        <length>3</length>
+        <precision>-1</precision>
+        <origin>Leer LR legado</origin>
+        <comments>fecha_listarec</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>num_listarec</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Leer LR legado</origin>
+        <comments>num_listarec</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>num_cia_serv</name>
+        <length>2</length>
+        <precision>-1</precision>
+        <origin>Leer LR legado</origin>
+        <comments>num_cia_serv</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>num_ofic_serv</name>
+        <length>2</length>
+        <precision>-1</precision>
+        <origin>Leer LR legado</origin>
+        <comments>num_ofic_serv</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>num_ruta_oper</name>
+        <length>2</length>
+        <precision>-1</precision>
+        <origin>Leer LR legado</origin>
+        <comments>num_ruta_oper</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>status_lr</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Leer LR legado</origin>
+        <comments>status_lr</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -751,8 +804,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1104</xloc>
-      <yloc>16</yloc>
+      <xloc>160</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -771,20 +824,19 @@
     <sql>SELECT
   ID_LISTA_RECORRIDO
 , NRO_LISTA
---, date_format(FEC_LISTA, "%Y-%m-%d") as FEC_LISTA
-, FEC_LISTA
+, CAST(FEC_LISTA AS DATETIME) as FEC_LISTA
 , ruta.COD_RUTA
 , oficina.COD_OFICINA
 , COMPANIA.COD_COMPANIA
 FROM dbo.lista_recorrido as lista_recorrido
-JOIN ruta as ruta
+JOIN ruta as ruta 
 ON ruta.ID_RUTA = lista_recorrido.FK_RUTA
 JOIN oficina as oficina
 ON oficina.ID_OFICINA = ruta.FK_OFICINA
-JOIN COMPANIA
+JOIN COMPANIA 
 ON COMPANIA.ID_COMPANIA = oficina.FK_COMPANIA
-WHERE FK_ESTATUS=19
-ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA;</sql>
+WHERE lista_recorrido.FK_ESTATUS=19 AND FEC_LISTA='2023-06-27'
+ORDER BY COMPANIA.COD_COMPANIA, oficina.COD_OFICINA, ruta.COD_RUTA, FEC_LISTA, NRO_LISTA;</sql>
     <limit/>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -811,7 +863,7 @@ ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, COMPANIA.COD_COMP
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -834,15 +886,15 @@ ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, COMPANIA.COD_COMP
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Timestamp</type>
         <storagetype>normal</storagetype>
         <name>FEC_LISTA</name>
-        <length>10</length>
+        <length>3</length>
         <precision>-1</precision>
         <origin>Leer LR repositorio</origin>
         <comments>FEC_LISTA</comments>
@@ -857,7 +909,7 @@ ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, COMPANIA.COD_COMP
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -880,7 +932,7 @@ ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, COMPANIA.COD_COMP
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -903,7 +955,7 @@ ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, COMPANIA.COD_COMP
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -926,7 +978,7 @@ ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, COMPANIA.COD_COMP
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -940,14 +992,58 @@ ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, COMPANIA.COD_COMP
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>144</yloc>
+      <xloc>160</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Leer PERSONA repositorio</name>
-    <type>TableInput</type>
+    <name>Filtrar filas</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>Ejecutar script SQL</send_true_to>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>status_lr</leftvalue>
+        <function>&lt;></function>
+        <rightvalue/>
+        <value>
+          <name>constant</name>
+          <type>Integer</type>
+          <text>11</text>
+          <length>-1</length>
+          <precision>0</precision>
+          <isnull>N</isnull>
+          <mask>####0;-####0</mask>
+        </value>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Ejecutar script SQL</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -957,520 +1053,21 @@ ORDER BY lista_recorrido.NRO_LISTA, lista_recorrido.FEC_LISTA, COMPANIA.COD_COMP
       <schema_name/>
     </partitioning>
     <connection>Repositorio Movil</connection>
-    <sql>SELECT
-  ID_PERSONA
-, TRIM(NUM_EMPLEADO) as NUM_EMPLEADO
-FROM dbo.persona
-ORDER BY NUM_EMPLEADO</sql>
-    <limit/>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>ID_PERSONA</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer PERSONA repositorio</origin>
-        <comments>ID_PERSONA</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>NUM_EMPLEADO</name>
-        <length>10</length>
-        <precision>-1</precision>
-        <origin>Leer PERSONA repositorio</origin>
-        <comments>NUM_EMPLEADO</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Leer empleado legado</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DEMO</connection>
-    <sql>SELECT 
-  TRIM(empleado) AS nro_trab
-, lr.fecha_listarec
-, lr.num_listarec
-, lr.num_cia_serv
-, lr.num_ofic_serv
-, lr.num_ruta_oper
-, 'Sistema' as USUARIO_CREACION
-, 'Sistema' as USUARIO_MODIFICACION
-, CURRENT_TIMESTAMP as FEC_CREACION 
-, CURRENT_TIMESTAMP as FEC_MODIFICACION 
-, (	SELECT 
-	(CASE WHEN  status = 'ACTIVO'  THEN 1 ELSE 2 END)  
-	from empleados as em where em.nro_trab=empleado
-	) AS ESTATUS_REGISTRO
-, ROL
-
-  FROM re_lista_rec_r as lr
-  cross apply
-(
-  values
-  ('2', lr.num_emp_chofer),
-  ('1', lr.num_emp_ayud),
-  ('3', lr.num_emp_cajero),
-  ('4', lr.cuarto_hombre),
-  ('5', lr.quinto_hombre),
-  ('6', lr.sexto_hombre)
-) c (ROL, empleado)
-
- --WHERE lr.fecha_listarec >= '2023-06-27'
-WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11 
- ORDER BY lr.num_listarec, lr.fecha_listarec, lr.num_cia_serv, lr.num_ofic_serv, lr.num_ruta_oper,rol;</sql>
-    <limit/>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>nro_trab</name>
-        <length>10</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>nro_trab</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>fecha_listarec</name>
-        <length>10</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>fecha_listarec</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>num_listarec</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>num_listarec</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>num_cia_serv</name>
-        <length>2</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>num_cia_serv</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>num_ofic_serv</name>
-        <length>2</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>num_ofic_serv</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>num_ruta_oper</name>
-        <length>2</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>num_ruta_oper</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>USUARIO_CREACION</name>
-        <length>7</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>USUARIO_CREACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>USUARIO_MODIFICACION</name>
-        <length>7</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>USUARIO_MODIFICACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>FEC_CREACION</name>
-        <length>3</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>FEC_CREACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>FEC_MODIFICACION</name>
-        <length>3</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>FEC_MODIFICACION</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>ESTATUS_REGISTRO</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>ESTATUS_REGISTRO</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>ROL</name>
-        <length>1</length>
-        <precision>-1</precision>
-        <origin>Leer empleado legado</origin>
-        <comments>ROL</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>80</xloc>
-      <yloc>16</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Ordenar por nro_trab</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>nro_trab</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Validar datos</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>NUM_EMPLEADO</name>
-      </field>
-      <field>
-        <name>ID_PERSONA</name>
-        <rename>FK_PERSONA</rename>
-      </field>
-      <field>
-        <name>ROL</name>
-        <rename>FK_ROL</rename>
-      </field>
-      <field>
-        <name>USUARIO_CREACION</name>
-      </field>
-      <field>
-        <name>USUARIO_MODIFICACION</name>
-      </field>
-      <field>
-        <name>FEC_CREACION</name>
-      </field>
-      <field>
-        <name>FEC_MODIFICACION</name>
-      </field>
-      <field>
-        <name>ESTATUS_REGISTRO</name>
-      </field>
-      <field>
-        <name>fecha_listarec</name>
-        <rename>FEC_LISTA</rename>
-      </field>
-      <field>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>UPDATE LISTA_RECORRIDO SET FK_ESTATUS=20 WHERE ID_LISTA_RECORRIDO = ?</sql>
+    <set_params>Y</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+      <argument>
         <name>ID_LISTA_RECORRIDO</name>
-        <rename>FK_LISTA_RECORRIDO</rename>
-      </field>
-      <field>
-        <name>NRO_LISTA</name>
-      </field>
-      <field>
-        <name>COD_RUTA</name>
-      </field>
-      <field>
-        <name>COD_OFICINA</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
+      </argument>
+    </arguments>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1480,8 +1077,8 @@ WHERE lr.fecha_listarec = CONVERT(DATE, CURRENT_TIMESTAMP) and lr.status_lr = 11
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>16</yloc>
+      <xloc>720</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
