@@ -441,10 +441,10 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>repositorio</database>
+    <database>REPOMOVIL</database>
     <port>1433</port>
-    <username>sa</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb0abe608cc2fd88</password>
+    <username>repomovil2</username>
+    <password>Encrypted 2be98afc86aa7a181b909af60cc9dff88</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -498,12 +498,12 @@
   <order>
     <hop>
       <from>Leer la ultima fecha regsitro REPOSITORIO</from>
-      <to>Asignar valor a variables</to>
+      <to>Asignar valor a variables 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Asignar valor a variables</name>
+    <name>Asignar valor a variables 2</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -531,8 +531,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>112</yloc>
+      <xloc>352</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -549,7 +549,7 @@
     </partitioning>
     <connection>Repositorio Movil</connection>
     <sql>SELECT 
-CONVERT(DATE,  MAX(FECHA_REGISTRO)) AS FECHA_REGISTRO_DIGITALES
+(CASE WHEN MAX(FECHA_REGISTRO) IS NOT NULL THEN CONVERT(DATE, MAX(FECHA_REGISTRO)) ELSE '2023-07-20' END) AS FECHA_REGISTRO_DIGITALES
 FROM CS_DIGITALES</sql>
     <limit>0</limit>
     <lookup/>
@@ -577,7 +577,7 @@ FROM CS_DIGITALES</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_VE</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -591,8 +591,8 @@ FROM CS_DIGITALES</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>112</yloc>
+      <xloc>128</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

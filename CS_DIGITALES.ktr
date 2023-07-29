@@ -560,16 +560,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Write to log</from>
-      <to>Filtrar filas</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filtrar filas</from>
-      <to>Leer cs digitales LEGADOS</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Leer cs digitales LEGADOS</from>
       <to>Validar datos</to>
       <enabled>Y</enabled>
@@ -580,56 +570,11 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filtrar filas</from>
-      <to>Write to log 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Write to log 2</from>
-      <to>Leer todo cs digitales LEGADOS</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Leer todo cs digitales LEGADOS</from>
-      <to>Validar datos</to>
+      <from>Write to log</from>
+      <to>Leer cs digitales LEGADOS</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Filtrar filas</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>Leer cs digitales LEGADOS</send_true_to>
-    <send_false_to>Write to log 2</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>FECHA_REGISTRO_DIGITALES</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Guardar cs digitales</name>
     <type>InsertUpdate</type>
@@ -702,6 +647,26 @@
         <rename>FECHA_REGISTRO</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>FEC_CREACION</name>
+        <rename>FEC_CREACION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>FEC_MODIFICACION</name>
+        <rename>FEC_MODIFICACION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>USUARIO_CREACION</name>
+        <rename>USUARIO_CREACION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>USUARIO_MODIFICACION</name>
+        <rename>USUARIO_MODIFICACION</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -734,7 +699,11 @@
       ,comprobante
       ,num_correl
       ,origen_comp
-      ,fecha_registro
+      ,fecha_registro 
+      ,'Sistema' as USUARIO_CREACION
+	  , 'Sistema' as USUARIO_MODIFICACION
+	  , CURRENT_TIMESTAMP as FEC_CREACION 
+	  , CURRENT_TIMESTAMP as FEC_MODIFICACION 
 FROM cs_digitales
 WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE,'${FECHA_REGISTRO_DIGITALES}')
 --WHERE CONVERT(DATE, fecha_registro) >= '2023-07-01'</sql>
@@ -883,6 +852,98 @@ WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE,'${FECHA_REGISTRO_DIGITALES}
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>USUARIO_CREACION</name>
+        <length>7</length>
+        <precision>-1</precision>
+        <origin>Leer cs digitales LEGADOS</origin>
+        <comments>USUARIO_CREACION</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>USUARIO_MODIFICACION</name>
+        <length>7</length>
+        <precision>-1</precision>
+        <origin>Leer cs digitales LEGADOS</origin>
+        <comments>USUARIO_MODIFICACION</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>FEC_CREACION</name>
+        <length>3</length>
+        <precision>-1</precision>
+        <origin>Leer cs digitales LEGADOS</origin>
+        <comments>FEC_CREACION</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>FEC_MODIFICACION</name>
+        <length>3</length>
+        <precision>-1</precision>
+        <origin>Leer cs digitales LEGADOS</origin>
+        <comments>FEC_MODIFICACION</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -893,47 +954,8 @@ WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE,'${FECHA_REGISTRO_DIGITALES}
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Leer todo cs digitales LEGADOS</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DEMO</connection>
-    <sql>SELECT num_cli
-      ,comprobante
-      ,num_correl
-      ,origen_comp
-      ,fecha_registro
- FROM cs_digitales</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>320</yloc>
+      <xloc>592</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1008,6 +1030,18 @@ WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE,'${FECHA_REGISTRO_DIGITALES}
         <name>fecha_registro</name>
         <rename>FECHA_REGISTRO</rename>
       </field>
+      <field>
+        <name>FEC_CREACION</name>
+      </field>
+      <field>
+        <name>FEC_MODIFICACION</name>
+      </field>
+      <field>
+        <name>USUARIO_CREACION</name>
+      </field>
+      <field>
+        <name>USUARIO_MODIFICACION</name>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
@@ -1056,38 +1090,6 @@ WHERE CONVERT(DATE, fecha_registro) >= CONVERT(DATE,'${FECHA_REGISTRO_DIGITALES}
     <GUI>
       <xloc>304</xloc>
       <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Write to log 2</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>BUSCANDO TODO CS DIGITALES</logmessage>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
